@@ -1,0 +1,1497 @@
+---
+title: "La escala de lo singular: Big Data, Small Data e intervención en lo social."
+lang: es
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-title: "Contenidos"
+    toc-depth: 3
+    number-sections: false
+    code-fold: false
+    code-tools: false
+    echo: false
+    smooth-scroll: true
+    embed-resources: true
+execute:
+  echo: false    # Oculta el código de todos los chunks por defecto
+  warning: false # Oculta los mensajes de advertencia (chau cartel de decimales)
+  message: false # Oculta mensajes de carga de librerías
+---
+
+```{=html}
+<style>
+#TOC .header-section-number { display: none; }
+
+/* Oculta el bloque de metadatos generado por Quarto (el autor se renderiza manualmente) */
+.quarto-title-meta { display: none; }
+
+/* Fuerza el índice de contenidos a la derecha */
+@media (min-width: 768px) {
+  body .page-columns.page-layout-article {
+    grid-template-columns: [screen-start] 1.5em [screen-start-inset] 5fr [page-start page-start-inset body-start-outset] 5fr [body-start] 1.5em [body-content-start] minmax(500px, calc(850px - 3em)) [body-content-end] 1.5em [body-end] 35px [body-end-outset] minmax(75px, 145px) [page-end-inset] 35px [page-end] 5fr [screen-end-inset] 1.5em [screen-end];
+  }
+  #quarto-margin-sidebar {
+    grid-column: body-end / page-end;
+  }
+}
+</style>
+```
+
+::: {style="text-align: right; margin: 0 0 1.5em; font-weight: 600;"}
+Christian Rodriguez<sup><a href="#nota-autor" style="text-decoration:none;">\*</a></sup>
+:::
+
+::: {style="text-align: right;"}
+*“Debido al capital que se necesita para construir a gran escala y a las maneras de ver qué optimiza,<br> los sistemas de la IA son, al fin y al cabo,<br> diseñados para servir a intereses dominantes ya existentes.<br> En ese sentido, la IA es un certificado de poder.”*<br> (Crawford, 2022)
+:::
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+<p>La velocidad con que avanzó la innovación tecnológica en las dos primeras décadas del siglo XXI configuró un período de aceleración sin precedentes. La Inteligencia Artificial, en particular, ha logrado penetrar en esferas que hasta hace poco parecían remotas a la lógica algorítmica y su integración en los distintos dominios de la vida colectiva profundiza una transformación cuyo alcance exige ser comprendido de manera integral en función de su naturaleza estructural y multidimensional.</p>
+
+<p>Este cambio de época no se agota en el plano tecnológico, tiene manifestaciones concretas en la reorganización de la vida cotidiana, en la reconfiguración de los espacios institucionales y en la transformación de los regímenes de producción de conocimiento. En este marco, las disciplinas ya no pueden concebirse como territorios estables en tanto sus tradiciones, sus métodos y sus saberes resultan interpelados por la irrupción de nuevos objetos, fuentes y herramientas que demandan una estricta vigilancia epistemológica sobre las condiciones de producción del saber y la capacidad explicativa de las categorías que utilizamos para comprender lo social.</p>
+
+<p>Las ciencias sociales no permanecen al margen de este reordenamiento; por el contrario, son uno de los ámbitos donde las tecnologías de información transforman con mayor claridad sus métodos y sus formas tradicionales de producir conocimiento. Este impacto, profundo y desigual, atraviesa los campos disciplinares de manera heterogénea, abre dilemas teóricos, metodológicos y éticos y habilita horizontes de acción que exceden el repertorio clásico de las disciplinas. Entre ellos, la creciente disponibilidad de datos adquiere un lugar central al fortalecer la toma de decisiones en la formación, la investigación y la intervención.</p>
+
+<p>A partir de este escenario, el presente trabajo busca interrogar, a partir de las coordenadas descritas, en los desafíos que estas transformaciones despliegan para las ciencias sociales y, de manera crítica, las oportunidades que la creciente disponibilidad de datos y las herramientas para su procesamiento ofrece para sostener decisiones mejor fundadas en el plano de la intervención. El análisis, conviene aclararlo desde el principio, no se centra en la inteligencia artificial en sí misma, sino en las herramientas que esta tecnología pone a disposición del ejercicio profesional del Trabajo Social.</p>
+
+<p>Estas ideas están desarrolladas en formato HTML que permite visualizar e interactuar con diferentes formatos que pueden adquirir los datos en el mismo documento y ser operado offline[^1]. Asimismo, el uso de este formato contribuye a abordar la relación entre tecnologías y ciencias sociales desde una perspectiva menos abstracta. Los ejemplos de análisis de datos fueron producidos en Quarto, una herramienta que articula código, resultados y texto en RStudio y Python.</p>
+:::
+
+[^1]: </p>
+
+    Se invita al lector a interactuar con los mapas y mosaicos presentados. Explorar estas visualizaciones permite no solo analizar los datos en detalle, sino también en las formas de comunicar y cómo las diferentes decisiones de diseño y visualización impactan en la interpretación de las disciplinas de las ciencias sociales.
+
+    </p>
+
+# La disputa por la legibilidad social: Racionalidad algorítmica vs. saberes del territorio
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+La expansión de las tecnologías digitales constituye uno de los rasgos estructurantes del siglo XXI. En el epicentro de este proceso de transformación se encuentran las tecnologías de la información que proporcionan los soportes técnicos para captar, almacenar y procesar datos en tiempo real provenientes de fuentes tan diversas como sensores, dispositivos móviles y/o redes sociales.
+
+</p>
+
+A su alrededor, las grandes corporaciones tecnológicas han organizado un dispositivo de extracción regular que convierte los movimientos más nimios de la vida digital —clics, búsquedas, pausas o revelación de preferencias— en insumos para la producción de valor. La información personal, que hasta hace poco carecía de utilidad mercantil, es hoy un activo estratégico objeto de un mercado regular e invisible. Sin embargo, este régimen de explotación de datos no se limita a su dimensión comercial: funciona también como un dispositivo de poder que reconfigura las relaciones sociales, redefine los límites entre lo público y lo privado y modela, desde la sombra, las condiciones de la vida contemporánea (Burgaya, 2021; Crawford, 2022).
+
+</p>
+
+</p>
+
+No se trata únicamente de que la vida cotidiana se haya vuelto rentable para las élites tecnológicas; lo que está en juego es una reconfiguración más profunda de los vínculos sociales, del acceso al conocimiento y de las asimetrías que estructuran el mundo contemporáneo. La capacidad de anticipar comportamientos, segmentar poblaciones e influir en decisiones individuales y colectivas otorga a quienes controlan los datos un poder sin precedentes (Da Empoli, 2025b). En este sentido, el nuevo orden basado en la captura masiva de información no solo instaura un modelo de acumulación distinto, sino que redefine las relaciones de fuerza entre actores sociales y plantea interrogantes centrales sobre la autonomía, la vigilancia y la justicia en la era digital (Han, 2022).
+
+</p>
+
+</p>
+
+Al mismo tiempo, las innovaciones tecnológicas habilitan horizontes inéditos al ofrecer nuevas formas de comprender los problemas sociales y ensayar respuestas más ajustadas a su complejidad. Sin embargo, para evitar que este potencial quede subordinado a una racionalidad instrumental, resulta imperativo adoptar un posicionamiento crítico sobre sus efectos en la agenda social. Esta discusión conduce, ineludiblemente, a indagar el papel de las ciencias sociales en el escenario contemporáneo.
+
+</p>
+
+</p>
+
+El caso del **“gemelo digital social”** es un ejemplo paradigmático de por qué la mirada de las ciencias sociales resulta insustituible. No se trata solo de evaluar la eficiencia técnica de un modelo predictivo, sino de interrogar qué nociones de sujeto, sociedad y bienestar quedan inscriptas en el código, qué exclusiones produce la traducción de la complejidad humana a variables discretas y qué márgenes de autonomía conservan quienes son modelados sin ser consultados. Este sistema predictivo, alimentado por datos sociales, simula comportamientos mediante la construcción de una representación virtual del sistema estudiado, que se nutre de información en tiempo real y se somete a escenarios hipotéticos para anticipar efectos de intervención, por ejemplo en políticas públicas. El problema central no reside en la tecnología, sino en el objeto al que se aplica: modelar infraestructuras como edificios, transporte o energía es radicalmente distinto de modelar trayectorias vitales. Las personas no son sistemas cerrados ni plenamente previsibles, por el contrario, están atravesadas por contextos, afectos, decisiones contingentes y dimensiones que ningún algoritmo captura en su totalidad. Representar a los miembros de una sociedad para anticipar el impacto de políticas sociales implica reducir la densidad de lo humano a variables procesables, con el riesgo de que lo singular, lo que resiste la codificación, desaparezca del horizonte de lo que el Estado está dispuesto a ver (Pallero, 2026).
+
+</p>
+
+</p>
+
+Para situar la complejidad de esta discusión y los distintos posicionamientos que convergen en su análisis, la siguiente visualización reúne diversas perspectivas articuladas alrededor del Gemelo Digital Social. Esta propuesta invita a revisar los supuestos y las tensiones ético políticas que atraviesan la modelización algorítmica, reconociendo que este dispositivo no es neutro, sino un punto clave en la disputa contemporánea por la soberanía del dato y por el reconocimiento de la singularidad humana en la gestión pública.
+
+</p>
+:::
+
+```{r, echo=FALSE, results='asis'}
+library(base64enc)
+setwd("C:/Users/chris/Downloads/Projects_R/TS-CD")
+imgs_ed <- c("x_milei", "anfibia", "foto_anfibia", "jp", "fvl", "x_petovello")
+tit_ed <- c("Milei y la ciencia de datos", "Anfibia: Cobertura editorial", "Anfibia: Mirror", "JP: Analisis social", "FVL: Tecnologia y sociedad", "Petovello: Datos y politica")
+desc_ed <- c("Produccion audiovisual sobre politicas de datos", "Cobertura en medios sobre ciencia de datos", "Voces desde el sur sobre tecnologia", "Analisis de politicas sociales", "Tecnologia y sociedad desde la facultad", "Produccion academica sobre datos")
+cat('<div class="swiper" id="swiper">\n<div class="swiper-wrapper">\n')
+for (i in seq_along(imgs_ed)) {
+  fname <- NULL
+  for (ext in c(".png", ".jpg", ".jpeg")) {
+    test <- paste0(imgs_ed[i], ext)
+    if (file.exists(test)) { fname <- test; break }
+  }
+  if (is.null(fname)) {
+    matches <- list.files(pattern = paste0("^", imgs_ed[i]))
+    if (length(matches) > 0) fname <- matches[1]
+  }
+  if (!is.null(fname) && file.exists(fname)) {
+    tryCatch({
+      d <- readBin(fname, "raw", as.integer(file.size(fname)))
+      b64 <- base64encode(d)
+      src <- paste0("data:image/png;base64,", b64)
+      cat(sprintf('<div class="swiper-slide"><img src="%s" alt="%s"></div>\n',
+                  src, tit_ed[i]))
+    }, error = function(e) cat(sprintf('<!-- Error: %s -->\n', imgs_ed[i])))
+  } else {
+    cat(sprintf('<!-- No encontrado: %s -->\n', imgs_ed[i]))
+  }
+}
+cat('</div>\n<div class="swiper-pagination"></div>\n<div class="swiper-button-prev"></div>\n<div class="swiper-button-next"></div>\n</div>\n')
+```
+
+```{=html}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+.sw-effects{display:flex;gap:8px;justify-content:center;margin:8px 0 4px;flex-wrap:wrap}
+.sw-effects button{
+  border:1px solid #e2e8f0;background:white;color:#475569;
+  font-family:'Inter',sans-serif;font-size:0.8em;font-weight:600;
+  padding:8px 14px;border-radius:20px;cursor:pointer;transition:all .25s ease;
+}
+.sw-effects button.active{
+  background:linear-gradient(135deg,#6366f1,#a855f7);color:white;border-color:transparent;
+  box-shadow:0 4px 14px rgba(99,102,241,0.35);
+}
+.swiper{
+  --swiper-theme-color:#6366f1;
+  --swiper-pagination-color:#a855f7;
+  width:100%;height:400px;margin:14px auto 8px;
+  perspective:1200px;
+}
+.swiper-slide{
+  position:relative;width:340px;max-width:88vw;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.2);
+  background:#f1f5f9;
+}
+.swiper-slide img{width:100%;height:100%;object-fit:cover;display:block;user-select:none}
+.sw-cap{
+  position:absolute;left:0;right:0;bottom:0;padding:52px 22px 18px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.85));
+  color:white;pointer-events:none;
+}
+.sw-cap h4{font-family:'Inter',sans-serif;font-size:1.02em;font-weight:600;margin:0 0 4px;text-shadow:0 2px 8px rgba(0,0,0,0.4)}
+.sw-cap p{font-family:'Inter',sans-serif;font-size:0.8em;color:rgba(255,255,255,0.78);margin:0}
+.swiper-button-prev,.swiper-button-next{color:#6366f1}
+.swiper-button-prev{left:6px}.swiper-button-next{right:6px}
+.swiper-pagination-bullet{background:#a855f7}
+.swiper-pagination-bullet-active{background:linear-gradient(135deg,#6366f1,#a855f7);box-shadow:0 0 8px rgba(139,92,246,0.5)}
+@media(max-width:560px){
+  .swiper{height:330px}
+  .swiper-button-prev,.swiper-button-next{display:none}
+}
+
+/* Lightbox ampliar imágenes */
+#swLb{display:none;position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0);align-items:center;justify-content:center;transition:background .5s ease}
+#swLb.on{display:flex;background:rgba(0,0,0,0.95)}
+#swLb .swLb-wrap{position:relative;text-align:center;opacity:0;transform:scale(0.88) translateY(20px);transition:all .55s cubic-bezier(.23,1,.32,1)}
+#swLb.on .swLb-wrap{opacity:1;transform:scale(1) translateY(0)}
+#swLb .swLb-img{max-width:82vw;max-height:72vh;border-radius:14px;box-shadow:0 40px 120px rgba(0,0,0,0.6);transition:transform .45s cubic-bezier(.23,1,.32,1);cursor:zoom-in;user-select:none}
+#swLb .swLb-img.zoomed{transform:scale(2);cursor:grab;max-width:none;max-height:none}
+.swLb-close{position:fixed;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:11;transition:all .3s ease}
+.swLb-close:hover{background:rgba(239,68,68,0.3);color:white;transform:rotate(90deg)}
+.swLb-nav{position:fixed;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;border:none;background:rgba(255,255,255,0.04);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);font-size:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:11;transition:all .3s ease}
+.swLb-nav:hover{background:rgba(99,102,241,0.2);color:white;transform:translateY(-50%) scale(1.1)}
+.swLb-prev{left:20px}.swLb-next{right:20px}
+.swLb-meta{margin-top:20px;opacity:0;transform:translateY(10px);transition:all .5s ease .15s}
+#swLb.on .swLb-meta{opacity:1;transform:translateY(0)}
+.swLb-title{color:white;font-family:'Inter',sans-serif;font-size:1.1em;font-weight:600;margin:0}
+.swLb-counter{position:fixed;top:24px;left:24px;color:rgba(255,255,255,0.3);font-family:monospace;font-size:.8em;letter-spacing:2px;z-index:11}
+.swLb-bar{position:fixed;bottom:0;left:0;height:3px;background:linear-gradient(90deg,#6366f1,#a855f7);transition:width .5s cubic-bezier(.23,1,.32,1);box-shadow:0 0 12px rgba(139,92,246,0.5);z-index:11}
+.swLb-toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);color:white;font-size:.82em;font-weight:500;padding:8px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);opacity:0;transition:all .3s cubic-bezier(.23,1,.32,1);z-index:99999;pointer-events:none}
+.swLb-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+
+<div class="sw-effects" id="swEffects">
+  <button data-effect="coverflow" class="active">Coverflow</button>
+  <button data-effect="cube">Cubo 3D</button>
+</div>
+
+<div id="swLb">
+  <button class="swLb-close" onclick="swLbClose()">&times;</button>
+  <span class="swLb-counter" id="swLbCounter"></span>
+  <button class="swLb-nav swLb-prev" onclick="swLbNav(-1)">&#8249;</button>
+  <div class="swLb-wrap"><img class="swLb-img" id="swLbImg" src="" ondblclick="swLbZoom()"></div>
+  <button class="swLb-nav swLb-next" onclick="swLbNav(1)">&#8250;</button>
+  <div class="swLb-bar" id="swLbBar"></div>
+</div>
+<div class="swLb-toast" id="swLbToast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+(function(){
+  var sw = null;
+  var effects = {
+    coverflow: { effect:'coverflow', slidesPerView:'auto', coverflowEffect:{ rotate:45, stretch:0, depth:120, modifier:1.2, slideShadows:true } },
+    cube:      { effect:'cube',      slidesPerView:1,   cubeEffect:{ slideShadows:true, shadow:true, shadowOffset:24, shadowScale:0.95 } }
+  };
+  function buildSwiper(key){
+    if(sw){ sw.destroy(true, true); sw = null; }
+    var opt = Object.assign({
+      speed:700, loop:true, grabCursor:true, centeredSlides:true,
+      parallax:true,
+      keyboard:{ enabled:true },
+      autoplay:{ delay:3500, disableOnInteraction:false },
+      pagination:{ el:'.swiper-pagination', clickable:true },
+      navigation:{ nextEl:'.swiper-button-next', prevEl:'.swiper-button-prev' }
+    }, effects[key] || effects.coverflow);
+    sw = new Swiper('#swiper', opt);
+  }
+  var bar = document.getElementById('swEffects');
+  var swiperEl = document.getElementById('swiper');
+  if(bar && swiperEl){ bar.parentNode.insertBefore(bar, swiperEl); }
+  buildSwiper('coverflow');
+  document.querySelectorAll('.sw-effects button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.sw-effects button').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      buildSwiper(b.getAttribute('data-effect'));
+    });
+  });
+
+  // --- Ampliar imágenes (lightbox) ---
+  var slides = document.querySelectorAll('#swiper .swiper-slide');
+  var lb = document.getElementById('swLb');
+  var srcs = [], caps = [];
+  slides.forEach(function(s){
+    var img = s.querySelector('img');
+    srcs.push(img ? img.src : '');
+    caps.push(img ? (img.getAttribute('alt') || '') : '');
+  });
+  var lbIdx = 0, lbOn = false, lbZoom = false, lbTTimer = null, lbTouchX = 0;
+
+  function lbOpen(i){
+    lbIdx = i; lbZoom = false; lbUpd();
+    lb.classList.add('on'); lbOn = true;
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose(){
+    lb.classList.remove('on'); lbOn = false; lbZoom = false;
+    var img = document.getElementById('swLbImg');
+    img.classList.remove('zoomed'); img.style.transform = '';
+    document.body.style.overflow = '';
+  }
+  function lbNav(d){
+    var img = document.getElementById('swLbImg');
+    img.style.opacity = '0'; img.style.transform = 'scale(0.95)';
+    setTimeout(function(){
+      lbIdx = (lbIdx + d + srcs.length) % srcs.length;
+      lbZoom = false; img.classList.remove('zoomed');
+      lbUpd();
+      requestAnimationFrame(function(){ img.style.opacity = '1'; img.style.transform = 'scale(1)'; });
+    }, 160);
+  }
+  function lbZoomToggle(){
+    lbZoom = !lbZoom;
+    var img = document.getElementById('swLbImg');
+    img.classList.toggle('zoomed', lbZoom);
+    img.style.transition = 'transform .45s cubic-bezier(.23,1,.32,1)';
+    img.style.transform = lbZoom ? 'scale(2)' : 'scale(1)';
+    lbToast(lbZoom ? 'Zoom activado' : 'Zoom desactivado');
+  }
+  function lbUpd(){
+    var img = document.getElementById('swLbImg');
+    img.src = srcs[lbIdx];
+    img.style.transform = 'scale(1)';
+    img.classList.remove('zoomed');
+    lbZoom = false;
+    document.getElementById('swLbCounter').textContent = (lbIdx + 1) + ' / ' + srcs.length;
+    document.getElementById('swLbBar').style.width = ((lbIdx + 1) / srcs.length * 100) + '%';
+  }
+  function lbToast(m){
+    var t = document.getElementById('swLbToast');
+    t.textContent = m; t.classList.add('show');
+    clearTimeout(lbTTimer);
+    lbTTimer = setTimeout(function(){ t.classList.remove('show'); }, 1400);
+  }
+  window.swLbClose = lbClose; window.swLbNav = lbNav; window.swLbZoom = lbZoomToggle;
+
+  slides.forEach(function(s, i){
+    var downX = 0, downY = 0, moved = false;
+    s.addEventListener('pointerdown', function(e){ downX = e.clientX; downY = e.clientY; moved = false; });
+    s.addEventListener('pointermove', function(e){
+      if (Math.abs(e.clientX - downX) > 8 || Math.abs(e.clientY - downY) > 8) moved = true;
+    });
+    s.addEventListener('click', function(e){
+      if (moved) return;
+      lbOpen(i);
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (!lbOn) return;
+    switch(e.key){
+      case 'Escape': lbClose(); break;
+      case 'ArrowLeft': lbNav(-1); break;
+      case 'ArrowRight': lbNav(1); break;
+      case 'z': case 'Z': lbZoomToggle(); break;
+    }
+  });
+  lb.addEventListener('touchstart', function(e){ lbTouchX = e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - lbTouchX;
+    if (Math.abs(dx) > 50) lbNav(dx > 0 ? -1 : 1);
+  }, {passive:true});
+  lb.addEventListener('click', function(e){ if (e.target === lb) lbClose(); });
+})();
+</script>
+```
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+Frente a la lógica de modelización cerrada de dispositivos como el gemelo digital social, herramientas colaborativas como <a href="https://tomi.openarg.org/" target="_blank" rel="noopener noreferrer"><strong>Tomi IA</strong></a> se presentan como un reverso metodológico para las transformaciones de la gestión pública. Concebido como un asistente interactivo que asimila el método de diseño de políticas de Bardach[^2] y la evidencia de casos comparados, este desarrollo se estructura bajo el principio de que el saber situado pertenece a los propios sujetos del territorio: ***«Vos conocés el territorio; él aporta la pregunta»***. A través de su dinámica de "lectura lateral", el sistema evita la automatización de diagnósticos estancos y, en su lugar, sugiere hipótesis y preguntas de trabajo orientadas a ser contrastadas de manera empírica en el terreno por los equipos que llevan adelante la acción pública.
+
+Con todo, esta apertura vuelve a plantear interrogantes centrales sobre la **delegación algorítmica**. Automatizar la clasificación y la predicción de la elegibilidad de los sujetos de derecho puede cristalizar nuevas exclusiones y revestir decisiones de descarte bajo una apariencia de neutralidad técnica. En este escenario, las ciencias sociales resultan indispensables para evitar la validación pasiva de prescripciones automatizadas y la reducción del profesional a un mero cargador de datos. Disputar la gobernanza de la información es clave para asegurar que la tecnología funcione como una infraestructura cognitiva al servicio de la soberanía disciplinar y del encuentro humano en el territorio.
+
+</p>
+
+[^2]: </p>
+
+    Este método propone un marco secuencial y estructurado diseñado para resolver problemas públicos a través de ocho etapas fundamentales: 1) definición del problema público; 2) obtención de información y evidencia; 3) construcción de alternativas; 4) selección de criterios; 5) proyección de resultados; 6) confrontación de costos y beneficios; 7) toma de decisiones (decidir); y 8) narración de la historia. Para una síntesis y guía analítica de esta herramienta en nuestro contexto, véase la publicación del Observatorio de Políticas Públicas (POLIS, 2022)
+
+    </p>
+    
+```{=html}
+<style>
+.tomi-info{margin:16px 0 4px;border:1px solid #e2e8f0;border-radius:14px;background:#fff;box-shadow:0 4px 14px rgba(15,23,42,.06);font-family:'Inter',sans-serif;overflow:hidden}
+.tomi-info summary{cursor:pointer;list-style:none;padding:14px 18px;font-weight:600;color:#0f172a;display:flex;align-items:center;gap:8px;user-select:none}
+.tomi-info summary::-webkit-details-marker{display:none}
+.tomi-info summary::after{content:'+';margin-left:auto;color:#6366f1;font-size:1.3em;line-height:1;transition:transform .25s ease}
+.tomi-info[open] summary::after{transform:rotate(45deg)}
+.tomi-info-body{padding:0 18px 18px;color:#334155;font-size:0.92em;line-height:1.6;text-align:left}
+.tomi-info-body p{margin:0 0 10px}
+.tomi-info-body p:last-child{margin-bottom:0}
+.tomi-info-body strong{color:#0f172a}
+.tomi-info-body ul{margin:0 0 12px;padding-left:20px}
+.tomi-info-body li{margin-bottom:6px}
+.tomi-info-body a{color:#6366f1;text-decoration:underline}
+</style>
+
+<details class="tomi-info">
+  <summary>Sobre Tomi IA (información disponible sin conexión)</summary>
+  <div class="tomi-info-body">
+    <p>Tomi es un copiloto para quien diseña políticas públicas —en un municipio, en la Ciudad de Buenos Aires, en la Nación— y para el vecino que quiere proponer una: vos conocés tu lugar y decidís; él trae el método, la norma que te aplica, los casos de otros gobiernos y los datos, y va dejando todo escrito. Esta guía recorre lo que te vas a cruzar, en orden. Se lee en diez minutos; después alcanza con volver a la sección que necesites.</p>
+    <p><strong>Antes de empezar</strong></p>
+    <p>Entrás con tu cuenta de Google. La primera vez Tomi te pide el perfil: desde dónde diseñás (un municipio, el Gobierno de la Ciudad de Buenos Aires, el Gobierno nacional, o sos vecino y querés proponer una política), provincia y municipio si corresponden, tu nombre, tu cargo, y si sos parte del Ejecutivo o del cuerpo legislativo de ese nivel (Concejo Deliberante, Legislatura, Congreso). Es una sola vez y se puede cambiar después, tocando tu nombre arriba a la izquierda.</p>
+    <ul>
+      <li>El ámbito decide qué norma cita Tomi: la ley orgánica municipal de tu provincia (conoce las 23) y, si sos del gobierno provincial, la constitución de tu provincia; la Constitución de la Ciudad y la Ley 70 si sos del gobierno porteño; la Constitución Nacional y las leyes de organización del Estado si sos de la Nación. Si sos vecino, la del nivel al que dirigís tu propuesta.</li>
+      <li>El municipio decide qué datos del Censo 2022 consulta y qué prensa local lee. Tomi lo busca en el padrón del INDEC y te muestra el nombre oficial para que confirmes que es ese.</li>
+      <li>La banca decide cómo termina el método: para el Ejecutivo, el paso 7 define el instrumento (decreto, ordenanza a elevar); para el Concejo, redacta el proyecto de ordenanza. Ver <a href="https://tomi.openarg.org/guia#concejo" target="_blank" rel="noopener noreferrer">Si sos del Concejo</a>.</li>
+    </ul>
+    <p><strong>La ficha del municipio</strong></p>
+    <p>Apenas guardás el perfil, Tomi lee sobre tu municipio —lo ves en vivo, con la transcripción de lo que va haciendo: prensa local reciente, Wikipedia, el censo— y arma una ficha de una carilla. Cuando termina, abre la conversación él: te cuenta dos o tres problemáticas concretas que encontró, con sus citas, y te pregunta cuál encarar o si tenés otra en mente.</p>
+    <p>La ficha es un resumen de prensa, no un dato oficial: Tomi dice "según la prensa". La ves entera en tu perfil, y podés pedirle que la vuelva a armar cuando quieras.</p>
+  </div>
+</details>
+```
+
+:::
+```{r, echo=FALSE, results='asis'}
+library(base64enc)
+setwd("C:/Users/chris/Downloads/Projects_R/TS-CD")
+imgs_cfb <- c("yeza", "pope", "lijalad", "respuesta")
+tit_cfb <- c("Yeza", "Pope", "Lijalad", "Respuesta")
+desc_cfb <- c("Yeza", "Pope", "Lijalad", "Respuesta")
+cat('<div style="position:absolute;width:0;height:0;overflow:hidden" id="mosaico-src-b">\n')
+for (i in seq_along(imgs_cfb)) {
+  fname <- NULL
+  for (ext in c(".jpeg", ".jpg", ".png")) {
+    test <- paste0(imgs_cfb[i], ext)
+    if (file.exists(test)) { fname <- test; break }
+  }
+  if (is.null(fname)) {
+    matches <- list.files(pattern = paste0("^", imgs_cfb[i]))
+    if (length(matches) > 0) fname <- matches[1]
+  }
+  if (!is.null(fname) && file.exists(fname)) {
+    tryCatch({
+      d <- readBin(fname, "raw", as.integer(file.size(fname)))
+      b64 <- base64encode(d)
+      mime <- if (grepl("\\.png$", fname, ignore.case = TRUE)) "image/png" else "image/jpeg"
+      src <- paste0("data:", mime, ";base64,", b64)
+      cat('<img class="mosaico-img-b" src="', src, '" data-full="', src, '" alt="', tit_cfb[i], '">', sep = "")
+    }, error = function(e) cat(sprintf('<!-- Error: %s -->\n', imgs_cfb[i])))
+  } else {
+    cat(sprintf('<!-- No encontrado: %s -->\n', imgs_cfb[i]))
+  }
+}
+cat('</div>\n')
+titulos_cfb_js <- paste0('"', gsub('"', '\\\\"', tit_cfb), '"', collapse = ",")
+descripciones_cfb_js <- paste0('"', gsub('"', '\\\\"', desc_cfb), '"', collapse = ",")
+cat('<script>\n')
+cat('window.mosaicoTitulosB = [', titulos_cfb_js, '];\n', sep = "")
+cat('window.mosaicoDescripcionesB = [', descripciones_cfb_js, '];\n', sep = "")
+cat('</script>\n')
+```
+
+```{=html}
+<style>
+#lb-b{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0);align-items:center;justify-content:center;transition:background 0.5s ease}
+#lb-b.on{display:flex;background:rgba(0,0,0,0.94)}
+#lb-b.on .lb-wrap{opacity:1;transform:scale(1) translateY(0)}
+#lb-b .lb-img{max-width:80vw;max-height:65vh;border-radius:14px;box-shadow:0 40px 120px rgba(0,0,0,0.5);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1);cursor:zoom-in;user-select:none;object-fit:contain}
+#lb-b .lb-img.zoomed{transform:scale(2);cursor:grab;max-width:none;max-height:none}
+#lb-b.on .lb-tools{opacity:1}
+#cf-wrap-b .cf-card{background:#f1f5f9}
+#cf-wrap-b .cf-card img{object-fit:contain}
+</style>
+
+<!-- COVER FLOW 3D -->
+<div class="cf-wrap" id="cf-wrap-b">
+  <button class="cf-arrow cf-arrow-left" onclick="cfMoveB(-1)">&#8249;</button>
+  <div class="cf-counter" id="cf-counter-b"></div>
+  <div class="cf-track" id="cf-track-b"></div>
+  <button class="cf-arrow cf-arrow-right" onclick="cfMoveB(1)">&#8250;</button>
+</div>
+<div class="cf-dots" id="cf-dots-b"></div>
+
+<p style="text-align:center;color:#94a3b8;font-family:Inter,sans-serif;font-size:0.82em;font-style:italic;margin-top:12px;margin-bottom:30px;">Hacé clic en cualquier imagen para ver en detalle</p>
+
+<!-- LIGHTBOX -->
+<div id="lb-b">
+  <button class="lb-close" onclick="lbCloseB()">&times;</button>
+  <span class="lb-counter" id="lb-counter-b"></span>
+  <button class="lb-nav lb-prev" onclick="lbNavB(-1)">&#8249;</button>
+  <div class="lb-wrap">
+    <div style="position:relative;display:inline-block">
+      <span class="rot-badge" id="rot-badge-b"></span>
+      <img class="lb-img" id="lb-img-b" src="" ondblclick="lbToggleZoomB()">
+    </div>
+  </div>
+  <button class="lb-nav lb-next" onclick="lbNavB(1)">&#8250;</button>
+  <div class="lb-tools">
+    <button class="lb-btn" onclick="lbRotB(-90)"><svg viewBox="0 0 24 24"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><kbd>R</kbd></button>
+    <button class="lb-btn" onclick="lbRotB(90)"><svg viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><kbd>T</kbd></button>
+    <button class="lb-btn" onclick="lbRotResetB()">0°<kbd>0</kbd></button>
+    <button class="lb-btn" onclick="lbToggleZoomB()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg><kbd>Z</kbd></button>
+  </div>
+  <div class="lb-progress"><div class="lb-progress-bar" id="lb-bar-b"></div></div>
+</div>
+<div class="toast" id="toast-b"></div>
+
+<script>
+(function(){
+  const items = document.querySelectorAll('.mosaico-img-b');
+  const N = items.length;
+  let cfIdx = 0, lbIdx = 0, lbRot = 0, lbZoom = false, lbOn = false;
+  let cfTimer = null, toastT = null;
+
+  function buildCF(){
+    const track = document.getElementById('cf-track-b');
+    const dots = document.getElementById('cf-dots-b');
+    track.innerHTML = ''; dots.innerHTML = '';
+    items.forEach((img, i) => {
+      const card = document.createElement('div');
+      card.className = 'cf-card';
+      card.innerHTML = '<img src="'+img.src+'">';
+      card.onclick = () => { cfIdx = i; updateCF(); openLB(i); };
+      track.appendChild(card);
+      const dot = document.createElement('button');
+      dot.className = 'cf-dot';
+      dot.onclick = (e) => { e.stopPropagation(); cfIdx = i; updateCF(); };
+      dots.appendChild(dot);
+    });
+    updateCF();
+  }
+
+  function updateCF(){
+    const cards = document.querySelectorAll('#cf-track-b .cf-card');
+    const dots = document.querySelectorAll('#cf-dots-b .cf-dot');
+    cards.forEach((c, i) => {
+      let diff = i - cfIdx;
+      if (diff > N/2) diff -= N;
+      if (diff < -N/2) diff += N;
+      const absD = Math.abs(diff);
+      let tx, tz, ry, sc, op, z;
+      if (diff === 0) {
+        tx = 0; tz = 0; ry = 0; sc = 1; op = 1; z = 5;
+      } else {
+        const sign = diff > 0 ? 1 : -1;
+        tx = sign * (180 + absD * 10);
+        tz = -absD * 120;
+        ry = sign * -30;
+        sc = Math.max(0.5, 1 - absD * 0.15);
+        op = Math.max(0.2, 1 - absD * 0.25);
+        z = 5 - absD;
+      }
+      c.style.transform = 'translateX('+tx+'px) translateZ('+tz+'px) rotateY('+ry+'deg) scale('+sc+')';
+      c.style.opacity = op;
+      c.style.zIndex = z;
+      c.classList.toggle('active', diff === 0);
+      if (absD > 3) c.style.opacity = 0;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === cfIdx));
+    document.getElementById('cf-counter-b').textContent = (cfIdx+1)+' / '+N;
+  }
+
+  window.cfMoveB = function(dir){
+    cfIdx = (cfIdx + dir + N) % N;
+    updateCF();
+  };
+
+  function startAutoplay(){
+    if(cfTimer) clearInterval(cfTimer);
+    cfTimer = setInterval(() => { cfIdx = (cfIdx + 1) % N; updateCF(); }, 3500);
+  }
+
+  let touchX = 0;
+  const wrap = document.getElementById('cf-wrap-b');
+  wrap.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+  wrap.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx) > 40) cfMoveB(dx > 0 ? -1 : 1);
+    startAutoplay();
+  }, {passive:true});
+
+  function openLB(i){ lbIdx=i; lbRot=0; lbZoom=false; lbOn=true; updateLB(); document.getElementById('lb-b').classList.add('on'); document.body.style.overflow='hidden'; }
+
+  function lbClose(){ document.getElementById('lb-b').classList.remove('on'); lbOn=false; document.body.style.overflow=''; lbZoom=false; document.getElementById('lb-img-b').classList.remove('zoomed'); document.getElementById('lb-img-b').style.transform=''; }
+  window.lbCloseB = lbClose;
+
+  function lbNav(dir){ const img=document.getElementById('lb-img-b'); img.style.opacity='0'; img.style.transform='scale(0.95)'; setTimeout(()=>{ lbIdx=(lbIdx+dir+N)%N; lbRot=0; lbZoom=false; img.classList.remove('zoomed'); updateLB(); requestAnimationFrame(()=>{img.style.opacity='1';img.style.transform='scale(1)';}); },160); }
+  window.lbNavB = lbNav;
+
+  function lbRotFn(g){ lbRot=(lbRot+g)%360; if(lbRot===-270)lbRot=90; if(lbRot===270)lbRot=-90; applyLBTransform(); const b=document.getElementById('rot-badge-b'); b.textContent=lbRot+'°'; b.classList.toggle('show',lbRot!==0); toast('Rotación: '+lbRot+'°'); }
+  window.lbRotB=lbRotFn;
+  function lbRotReset(){ lbRot=0; applyLBTransform(); document.getElementById('rot-badge-b').classList.remove('show'); toast('Rotación reseteada'); }
+  window.lbRotResetB=lbRotReset;
+  function lbToggleZoom(){ lbZoom=!lbZoom; const img=document.getElementById('lb-img-b'); img.classList.toggle('zoomed',lbZoom); img.style.transition='transform 0.45s cubic-bezier(0.23,1,0.32,1)'; img.style.transform=lbZoom?'scale(2)':'scale(1)'; toast(lbZoom?'Zoom activado':'Zoom desactivado'); }
+  window.lbToggleZoomB=lbToggleZoom;
+  function applyLBTransform(){ const img=document.getElementById('lb-img-b'); const s=lbZoom?2:1; img.style.transition='transform 0.45s cubic-bezier(0.23,1,0.32,1)'; img.style.transform='scale('+s+') rotate('+lbRot+'deg)'; }
+  function updateLB(){ const img=items[lbIdx]; const mi=document.getElementById('lb-img-b'); mi.src=img.dataset.full||img.src; mi.style.transform='scale(1)'; mi.classList.remove('zoomed'); lbZoom=false; document.getElementById('lb-counter-b').textContent=(lbIdx+1)+' / '+N; document.getElementById('lb-bar-b').style.width=((lbIdx+1)/N*100)+'%'; document.getElementById('rot-badge-b').classList.remove('show'); }
+  function toast(msg){ const t=document.getElementById('toast-b'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1400); }
+
+  document.addEventListener('keydown', e => {
+    if(!lbOn) return;
+    switch(e.key){
+      case 'Escape':lbClose();break;
+      case 'ArrowLeft':lbNav(-1);break;
+      case 'ArrowRight':lbNav(1);break;
+      case 'r':case 'R':lbRotFn(-90);break;
+      case 't':case 'T':lbRotFn(90);break;
+      case '0':lbRotReset();break;
+      case 'z':case 'Z':lbToggleZoom();break;
+    }
+  });
+
+  let lbTouchX=0;
+  document.getElementById('lb-b').addEventListener('touchstart',e=>{lbTouchX=e.touches[0].clientX;},{passive:true});
+  document.getElementById('lb-b').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-lbTouchX; if(Math.abs(dx)>50) lbNav(dx>0?-1:1);},{passive:true});
+  document.getElementById('lb-b').addEventListener('click',e=>{if(e.target===document.getElementById('lb-b'))lbClose();});
+
+  buildCF(); startAutoplay();
+})();
+</script>
+```
+
+</p>
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+El recorrido realizado nos enfrenta ante una pregunta que difícilmente puede eludirse: ¿la integración de estas herramientas nos proporciona un conocimiento más riguroso de lo social o nos ofrece una apariencia de objetividad que oculta los sesgos y las exclusiones que el propio modelo produce? La pregunta no es retórica y su respuesta condiciona el modo en que las ciencias sociales pueden intervenir en el diseño y la orientación de estos desarrollos tecnológicos.
+
+</p>
+
+:::
+
+# Soberanía cognitiva y codiseño: Habilidades técnicas para la intervención social
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+
+Estas innovaciones tecnológicas suelen emerger del campo de las ciencias computacionales o de disciplinas afines de fuerte base técnica, y su desarrollo está principalmente orientado por los intereses y las agendas del sector privado (Zelicovich, 2021). Desde las ciencias sociales, en cambio, la relación con estas tecnologías es más heterogénea; coexisten aproximaciones entusiastas que ven en ellas una oportunidad para renovar los repertorios metodológicos, posturas escépticas que subrayan sus sesgos y sus riesgos y zonas de indiferencia que reflejan la dificultad de integrar lenguajes y lógicas que no forman parte del acervo formativo de estas disciplinas. Pero lo que resulta menos frecuente, y quizás más significativo, es la capacidad de incidir en el diseño mismo de los dispositivos tecnológicos, de participar en la definición de los problemas que estos se proponen resolver o de generar desarrollos propios que no reproduzcan, acríticamente, las lógicas de los actores dominantes en el ecosistema digital. Esta asimetría no es contingente, por el contrario, expresa una distribución desigual de recursos simbólicos y materiales así como un desfase entre los ritmos de la innovación tecnológica y los tiempos, más pausados y reflexivos, de la investigación social (Gindin & Busso, 2021).
+
+</p>
+
+</p>
+Este escenario interpela las estrategias de intervención y los marcos metodológicos tradicionales. La relación entre ciencias sociales y tecnologías digitales no es estática, asistimos a un proceso de convergencia creciente, aunque desigual, que se acelera en algunos campos disciplinares y encuentra resistencias en otros. Lo que resulta nítido es la escala sin precedentes de la producción de datos sobre las personas, sus interacciones y sus trayectorias, lo que abre posibilidades analíticas que hasta hace poco eran impensables para el estudio de los problemas sociales, políticos y económicos (Actis, Berdondini & Castro Rojas, 2021). En el terreno de la intervención, estas herramientas ofrecen, en principio, un horizonte de mejora en múltiples dimensiones como la capacidad de respuesta, la efectividad de los programas, la equidad en el acceso a recursos y prestaciones y la autonomía de los sujetos involucrados. Pero que estas posibilidades existan no significa que se realicen de manera automática, su concreción depende de cómo se diseñen, quiénes las controlen y con qué criterios éticos se implementen.
+
+</p>
+
+</p>
+
+Estas interrelaciones entre tecnologías, datos, formación profesional, intervención en lo social y producción de conocimiento requieren, para ser pensadas e implementadas, un diálogo sostenido con la **ciencia de datos**. Esta es entendida aquí como aquella disciplina que se ocupa de extraer valor de los datos mediante métodos científicos, algoritmos, técnicas y herramientas informáticas, con el principal objetivo de descubrir y comunicar conocimiento y soluciones descriptivas, predictivas o prescriptivas. [^3]. Si bien en este trabajo optamos por la sugerente simplificación de definirla como la disciplina que *"extrae conocimientos a partir de datos desordenados"*,[^4]es fundamental precisar que su andamiaje no opera de manera aislada: junto al big data y al aprendizaje automático (machine learning), conforma un **ecosistema interconectado** diseñado para procesar y estructurar conjuntos de datos de alta complejidad.
+
+</p>
+
+</p>
+
+Este diálogo resulta crítico porque los datos de interés social no se presentan listos para el análisis; suelen ser espontáneos, ruidosos y anárquicos por naturaleza. Por ello, el aporte metodológico de la ciencia de datos a las ciencias sociales no se reduce al cómputo ciego, sino que involucra un riguroso ciclo de **limpieza, estandarización, integración y protección de la información**, capaz de transformar la "huella digital" o los registros administrativos desestructurados en representaciones analíticas de la realidad social. De esta manera, técnicas de modelado como el agrupamiento *(clustering)* para perfilar dinámicas de segregación, los modelos supervisados con datos estructurados para predecir el acceso a los sistemas de protección, o el procesamiento del lenguaje natural (NLP) para sistematizar y clasificar grandes volúmenes de textos cualitativos del territorio, dotan a la intervención de una escala y una precisión explicativa sin precedentes en la tradición disciplinar.
+
+</p>
+
+</p>
+De forma complementaria, esta convergencia exige sostener una estricta **vigilancia ética y epistemológica**. La capacidad del poder algorítmico para detectar regularidades y correlaciones no anula la necesidad de la teoría: como se advierte desde la investigación social, **"medir patrones no significa poder explicarlos"**. Los modelos predictivos o prescriptivos solo cobran sentido y legitimidad política cuando son interpretados a través de un marco teórico-conceptual situado. El propósito de esta articulación no es exigir que el cientista social se convierta en un programador experto, sino dotarlo de recursos fundamentales —comprensión general de los algoritmos, uso básico de interfaces de datos (APIs) y nociones de lenguajes de programación— que le permitan liderar con autonomía crítica el codiseño de estas tecnologías públicas, asegurando que las decisiones no queden delegadas en la opacidad del código, sino fundamentadas en un diálogo de paridad multidisciplinar.
+
+</p>
+
+</p>
+Internalizar sus aportes no implica reproducir técnicas de manera instrumental ni aplicarlas sin reflexión. La ciencia de datos interpela a cada campo que trabaja con información: lo tensiona y, al mismo tiempo, lo enriquece. Sus métodos para procesar grandes volúmenes de datos no solo ofrecen nuevas herramientas, sino que devuelven preguntas que obligan a revisar supuestos, reformular problemas y ensayar respuestas distintas. Esta retroalimentación es bidireccional: la ciencia de datos también se nutre del saber disciplinar y de sus marcos interpretativos. Para las ciencias sociales, este diálogo es especialmente relevante porque no solo amplía las posibilidades analíticas, sino que invita a repensar cómo construimos conocimiento sobre lo social y a interrogar la validez de las categorías y el sentido ético político de nuestras intervenciones.
+</p>
+
+:::
+
+[^3]: </p>
+
+    Carlo, C. (2023, 21 de septiembre). *Data science and sociology: how to use data to explore and model social phenomena*. Medium.
+
+    </p>
+
+[^4]: </p>
+
+    Grus, J. (2020). *Ciencia de datos desde cero* (2.ª ed.). O'Reilly.
+
+    </p>
+
+# La convergencia de la Small y la Big Data: oportunidad para el Trabajo Social
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+
+Históricamente, las ciencias sociales y, en particular, el Trabajo Social, han priorizado modelos de intervención en los niveles individual, grupal y comunitario (Barranco Expósito, 2004) apoyados en una escala de producción de información denominada, desde el mundo datos, ***small data***: entrevistas, encuestas de alcance limitado, grupos de discusión y observaciones participantes, elaboradas para cada investigación y centradas en casos, diagnósticos situacionales o muestras no probabilísticas. Esta tradición metodológica es valiosa porque se funda en la cercanía con los sujetos, en el vínculo que habilita la escucha y en la densidad de los relatos, permitiendo captar matices y particularidades biográficas que otras escalas tienden a diluir. El small data posibilita comprender la singularidad del caso y sostener una mirada situada, atenta a las condiciones concretas en que cada sujeto o grupo atraviesa su situación.
+
+</p>
+
+</p>
+
+Sin embargo, su propia escala deja fuera dimensiones estructurales, regularidades y tendencias de conjunto que solo la agregación de grandes volúmenes de información, el ***big data***, permite identificar (Gindin & Busso, 2021). En la tensión entre lo singular y lo general se abre un espacio fértil de articulación: las metodologías de la ciencia de datos no reemplazan el saber acumulado del Trabajo Social, sino que lo complementan al ofrecer herramientas para identificar patrones poblacionales, anticipar riesgos y dimensionar problemáticas sociales en una escala que la intervención cotidiana difícilmente alcanza por sí sola. Los métodos de intervención frente a las manifestaciones de la cuestión social encuentran en estas innovaciones tecnológicas un terreno propicio para comprender y abordar con mayor precisión los problemas, enriqueciendo diagnósticos, afinando estrategias, habilitando nuevas formas de monitoreo y fortaleciendo las evaluaciones.
+
+</p>
+
+</p>
+
+La apropiación crítica de estas herramientas permite ampliar los diagnósticos más allá de la observación directa o la entrevista en profundidad, mediante el cruce de fuentes antes inaccesibles o inconexas, disponer de información sobre tendencias y configuraciones poblacionales y construir sistemas de monitoreo y evaluación con indicadores que trasciendan la percepción inmediata de los actores. El dato no reemplaza la escucha ni el vínculo, pero puede evitar que la intervención dependa exclusivamente de la intuición profesional o de la información parcial que cada caso proporciona, interpelando la práctica desde otras escalas de análisis que ayuden a dimensionar los problemas, contextualizar las situaciones singulares y fundamentar decisiones con evidencia que no siempre está disponible en el nivel micro.
+
+</p>
+
+</p>
+
+Es razonable suponer que estas transformaciones no solo expanden los ámbitos de intervención socio ocupacional, sino que habilitan un reposicionamiento de la disciplina a lo largo de todo el ciclo de las políticas públicas. Si la inserción profesional del Trabajo Social se ha concentrado predominantemente en la implementación, la apropiación de la ciencia de datos ofrece la posibilidad de participar también en el diagnóstico, el diseño y la evaluación, integrando el conocimiento situado de los territorios con la capacidad de interrogar los datos desde una mirada atenta a la desigualdad y los derechos. El desafío no es estrictamente técnico, sino ético político y de soberanía disciplinar: se trata de disputar la definición de los problemas sociales y evitar que la disciplina se reduzca a la mera gestión administrativa de sus efectos.
+</p>
+
+</p>
+
+El trabajo con datos sociales enfrenta dificultades asociadas a la calidad, el volumen disponible, su capacidad de representación y las cuestiones de privacidad y ética que conlleva la gestión de información sensible. Las ciencias sociales contemporáneas se ven ante el imperativo de reconfigurar sus marcos analíticos y metodológicos para operar en un escenario marcado por la digitalización estructural de la vida cotidiana y por una economía basada en la explotación y mercantilización de datos masivos. En este contexto de profundas inequidades y brechas digitales, el desafío formativo no radica solo en adquirir destrezas técnicas, sino en promover una apropiación crítica que, dentro de un marco de resguardo epistemológico, permita interrogar la lógica de los algoritmos y su impacto en lo social. Alcanzar una especialización en el instrumental de la ciencia de datos es condición de posibilidad para que las disciplinas sociales incidan con autonomía en el diseño de mediaciones tecnológicas situadas, de modo que la innovación orientada a la gestión de derechos no se reduzca a la eficiencia operativa, sino que se inscriba en una dimensión ético política comprometida con la transformación de las condiciones de vida de los sectores históricamente postergados.
+
+</p>
+
+</p>
+
+La participación sustantiva en el diseño tecnológico exige que las ciencias sociales trasciendan la razón instrumental y alcancen una especialización técnica en análisis de datos, programación y arquitectura de modelos algorítmicos. Aunque este tránsito es aún incipiente en disciplinas como la Sociología, la Ciencia Política o el Trabajo Social, la irrupción de las herramientas generativas actúa como facilitador pedagógico al aplanar la curva de aprendizaje, democratizar el acceso a tecnologías complejas y expandir los límites tradicionales del ejercicio profesional frente a mercados laborales altamente digitalizados, sin renunciar a la dimensión ético política ni a la rigurosidad conceptual necesaria para preservar la densidad de lo humano frente al diseño algorítmico.
+
+</p>
+
+</p>
+
+Esta demanda de formación especializada interpela directamente a las carreras de grado, que se ven convocadas a incorporar estos saberes no como materias electivas, sino como dimensiones fundamentales en la configuración del perfil profesional del Trabajo Social. La cuestión de fondo no es solo incluir programación o análisis de datos en la currícula, sino decidir cómo integrarlos evitando que la mirada crítica quede subordinada a la eficacia técnica, de modo que los futuros profesionales logren interrogar los datos desde un posicionamiento ético político y no se limiten a su operación instrumental. De esta discusión depende que estas herramientas no consoliden nuevas asimetrías entre quienes acceden a una formación rigurosa y quienes permanecen excluidos.
+
+</p>
+
+</p>
+Hoy es posible identificar trayectos formativos que exploran esta convergencia, aunque aún en fase inicial y con marcada heterogeneidad. Algunas unidades académicas integran contenidos de análisis de datos en sus planes de grado, otras canalizan la demanda mediante diplomaturas o extensión. Con frecuencia, estas iniciativas surgen del impulso de estudiantes o equipos de investigación más que de una planificación institucional deliberada, y todavía no configuran un escenario consolidado: su continuidad depende de actores específicos más que de políticas académicas de largo aliento. La visualización que sigue reúne experiencias en el campo de las ciencias sociales con el propósito de trazar un mapa provisorio de los avances y de los desafíos pendientes.
+
+</p>
+
+
+
+```{r, echo=FALSE, results='asis'}
+library(knitr)
+library(base64enc)
+setwd("C:/Users/chris/Downloads/Projects_R/TS-CD")
+imagenes <- c("clacso", "colegio", "fsoc", "IA_ts", "uba_1", "uba_2", "auto_ps", "crítica_IA")
+titulos <- c(
+  "CLACSO: AnÃ¡lisis de datos con Python e IA",
+  "Colegio de Profesionales: El trabajo social y la ciencia de datos",
+  "UBA Sociales: Curso Python para quÃ©?",
+  "CPAS La Pampa: IA como herramienta para el Trabajo Social",
+  "UBA Trabajo Social (Parte I): Trabajo Social y tecnologías",
+  "UBA Trabajo Social (Parte II): Taller de IA y prompts",
+  "Auto PS: Herramienta de análisis",
+  "Crítica a la IA: Posicionamiento crítico"
+)
+descripciones <- c(
+  "Coordinación: Pablo Dalle y Rodolfo Elbert.",
+  "Docente: Sofía Laura Lampropulos.",
+  "Docente: Tomás Bustos.",
+  "Disertante: Lic. Héctor J. Sánchez.",
+  "Conversatorio sobre IA.",
+  "Tallerista: Ezequiel Tatay.",
+  "Captura de la herramienta de análisis.",
+  "Reflexión y debate sobre los usos de la IA."
+)
+cat('<div style="position:absolute;width:0;height:0;overflow:hidden" id="mosaico-src">\n')
+for (i in 1:length(imagenes)) {
+  archivo_encontrado <- NULL
+  if (file.exists(imagenes[i])) {
+    archivo_encontrado <- imagenes[i]
+  } else {
+    extensiones <- c(".png", ".jpg", ".jpeg", ".PNG", ".JPG", ".JPEG")
+    for (ext in extensiones) {
+      if (file.exists(paste0(imagenes[i], ext))) {
+        archivo_encontrado <- paste0(imagenes[i], ext)
+        break
+      }
+    }
+  }
+  if (is.null(archivo_encontrado)) {
+    archivos_coincidentes <- list.files(pattern = paste0("^", imagenes[i]))
+    if (length(archivos_coincidentes) > 0) {
+      archivo_encontrado <- archivos_coincidentes[1]
+    }
+  }
+  if (!is.null(archivo_encontrado) && file.exists(archivo_encontrado)) {
+    tryCatch({
+      img_data <- readBin(archivo_encontrado, "raw", as.integer(file.size(archivo_encontrado)))
+      img_base64 <- base64enc::base64encode(img_data)
+      if (grepl("\\.png$", archivo_encontrado, ignore.case = TRUE)) {
+        mime_type <- "image/png"
+      } else if (grepl("\\.jpe?g$", archivo_encontrado, ignore.case = TRUE)) {
+        mime_type <- "image/jpeg"
+      } else {
+        mime_type <- "image/png"
+      }
+      src <- paste0("data:", mime_type, ";base64,", img_base64)
+      cat('<img class="mosaico-img" src="', src, '" data-full="', src, '">', sep = "")
+    }, error = function(e) {
+      cat('<!-- Error: ', imagenes[i], ' -->\n')
+    })
+  } else {
+    cat('<!-- No encontrado: ', imagenes[i], ' -->\n')
+  }
+}
+cat('</div>\n')
+titulos_js <- paste0('"', gsub('"', '\\\\"', titulos), '"', collapse = ",")
+descripciones_js <- paste0('"', gsub('"', '\\\\"', descripciones), '"', collapse = ",")
+cat('<script>\n')
+cat('window.mosaicoTitulos = [', titulos_js, '];\n', sep = "")
+cat('window.mosaicoDescripciones = [', descripciones_js, '];\n', sep = "")
+cat('</script>\n')
+```
+
+```{=html}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+.leaflet-container{width:100%;height:550px;margin:16px 0}
+
+/* COVER FLOW 3D SLIDER */
+.cf-wrap{
+  position:relative;width:100%;max-width:860px;margin:20px auto 0;
+  height:420px;perspective:1000px;overflow:visible;
+}
+.cf-track{
+  position:absolute;top:50%;left:50%;
+  width:0;height:0;
+  transform-style:preserve-3d;
+  transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.cf-card{
+  position:absolute;top:0;left:0;
+  width:240px;height:320px;margin-left:-120px;margin-top:-160px;
+  border-radius:14px;overflow:hidden;cursor:pointer;
+  box-shadow:0 15px 50px rgba(0,0,0,0.3);
+  transition:all 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+  backface-visibility:hidden;
+}
+.cf-card img{width:100%;height:100%;object-fit:cover;display:block}
+.cf-card .cf-label{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:50px 16px 16px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.8));
+  color:white;font-family:'Inter',sans-serif;font-size:0.85em;font-weight:500;
+  opacity:0;transition:opacity 0.4s ease;text-align:center;line-height:1.35;
+}
+.cf-card.active .cf-label{opacity:1}
+.cf-card:hover img{filter:brightness(0.85)}
+.cf-card.active{box-shadow:0 30px 80px rgba(0,0,0,0.4),0 0 0 2px rgba(255,255,255,0.15)}
+
+.cf-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:10;
+  width:48px;height:48px;border-radius:50%;border:none;
+  background:rgba(0,0,0,0.06);backdrop-filter:blur(8px);
+  border:1px solid rgba(0,0,0,0.08);
+  color:rgba(0,0,0,0.4);font-size:26px;cursor:pointer;
+  transition:all 0.3s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.cf-arrow:hover{background:rgba(99,102,241,0.12);color:#6366f1;transform:translateY(-50%) scale(1.1)}
+.cf-arrow-left{left:-24px}
+.cf-arrow-right{right:-24px}
+
+.cf-dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.cf-dot{
+  width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(0,0,0,0.15);transition:all 0.3s ease;
+}
+.cf-dot.active{
+  background:linear-gradient(135deg,#6366f1,#a855f7);
+  width:24px;border-radius:4px;box-shadow:0 0 10px rgba(99,102,241,0.3);
+}
+.cf-counter{
+  position:absolute;top:12px;right:16px;z-index:5;
+  background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);
+  font-family:'Inter',monospace;font-size:0.75em;
+  padding:4px 10px;border-radius:8px;color:rgba(0,0,0,0.4);
+}
+
+/* LIGHTBOX */
+#lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0);align-items:center;justify-content:center;transition:background 0.5s ease}
+#lb.on{display:flex;background:rgba(0,0,0,0.94)}
+.lb-wrap{position:relative;text-align:center;opacity:0;transform:scale(0.9) translateY(20px);transition:all 0.5s cubic-bezier(0.23,1,0.32,1)}
+#lb.on .lb-wrap{opacity:1;transform:scale(1) translateY(0)}
+#lb .lb-img{max-width:80vw;max-height:65vh;border-radius:14px;box-shadow:0 40px 120px rgba(0,0,0,0.5);transition:transform 0.5s cubic-bezier(0.23,1,0.32,1);cursor:zoom-in;user-select:none}
+#lb .lb-img.zoomed{transform:scale(2);cursor:grab;max-width:none;max-height:none}
+.lb-close{position:fixed;top:20px;right:24px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;z-index:11}
+.lb-close:hover{background:rgba(239,68,68,0.3);color:white;transform:rotate(90deg)}
+.lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:50px;height:50px;border-radius:50%;border:none;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);font-size:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;z-index:11}
+.lb-nav:hover{background:rgba(99,102,241,0.2);color:white;transform:translateY(-50%) scale(1.1)}
+.lb-prev{left:20px}.lb-next{right:20px}
+.lb-info{margin-top:20px;opacity:0;transform:translateY(8px);transition:all 0.5s ease 0.15s}
+#lb.on .lb-info{opacity:1;transform:translateY(0)}
+.lb-title{color:white;font-family:'Inter',sans-serif;font-size:1.1em;font-weight:600;margin:0;text-shadow:0 2px 10px rgba(0,0,0,0.4)}
+.lb-desc{color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:0.85em;margin:6px 0 0;font-weight:300}
+.lb-counter{position:fixed;top:24px;left:24px;color:rgba(255,255,255,0.35);font-family:'Inter',monospace;font-size:0.8em;letter-spacing:2px;z-index:11}
+.lb-progress{position:fixed;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.06);z-index:11}
+.lb-progress-bar{height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a855f7);transition:width 0.5s cubic-bezier(0.23,1,0.32,1);box-shadow:0 0 12px rgba(139,92,246,0.5)}
+.rot-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);color:white;font-family:'Inter',monospace;font-size:11px;padding:4px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);opacity:0;transition:opacity 0.3s ease;pointer-events:none;z-index:5}
+.rot-badge.show{opacity:1}
+.lb-tools{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:6px 8px;z-index:11;opacity:0;transition:opacity 0.4s ease 0.2s}
+#lb.on .lb-tools{opacity:1}
+.lb-btn{color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;font-size:11px;font-weight:500;cursor:pointer;background:none;border:none;border-radius:10px;padding:8px 12px;display:flex;align-items:center;gap:5px;transition:all 0.2s ease;white-space:nowrap}
+.lb-btn:hover{background:rgba(99,102,241,0.2);color:white}
+.lb-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lb-btn kbd{font-size:8px;opacity:0.35;background:rgba(255,255,255,0.08);padding:1px 4px;border-radius:3px;font-family:monospace}
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);color:white;font-family:'Inter',sans-serif;font-size:0.82em;font-weight:500;padding:8px 18px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);opacity:0;transition:all 0.3s cubic-bezier(0.23,1,0.32,1);z-index:99999;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+
+<!-- COVER FLOW 3D -->
+<div class="cf-wrap" id="cf-wrap">
+  <button class="cf-arrow cf-arrow-left" onclick="cfMove(-1)">&#8249;</button>
+  <div class="cf-counter" id="cf-counter"></div>
+  <div class="cf-track" id="cf-track"></div>
+  <button class="cf-arrow cf-arrow-right" onclick="cfMove(1)">&#8250;</button>
+</div>
+<div class="cf-dots" id="cf-dots"></div>
+
+<p style="text-align:center;color:#94a3b8;font-family:Inter,sans-serif;font-size:0.82em;font-style:italic;margin-top:12px;margin-bottom:30px;">Hacé clic en cualquier imagen para ver en detalle</p>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button class="lb-close" onclick="lbClose()">&times;</button>
+  <span class="lb-counter" id="lb-counter"></span>
+  <button class="lb-nav lb-prev" onclick="lbNav(-1)">&#8249;</button>
+  <div class="lb-wrap">
+    <div style="position:relative;display:inline-block">
+      <span class="rot-badge" id="rot-badge"></span>
+      <img class="lb-img" id="lb-img" src="" ondblclick="lbToggleZoom()">
+    </div>
+  </div>
+  <button class="lb-nav lb-next" onclick="lbNav(1)">&#8250;</button>
+  <div class="lb-tools">
+    <button class="lb-btn" onclick="lbRot(-90)"><svg viewBox="0 0 24 24"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><kbd>R</kbd></button>
+    <button class="lb-btn" onclick="lbRot(90)"><svg viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><kbd>T</kbd></button>
+    <button class="lb-btn" onclick="lbRotReset()">0°<kbd>0</kbd></button>
+    <button class="lb-btn" onclick="lbToggleZoom()"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg><kbd>Z</kbd></button>
+  </div>
+  <div class="lb-progress"><div class="lb-progress-bar" id="lb-bar"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const T = window.mosaicoTitulos || [];
+  const D = window.mosaicoDescripciones || [];
+  const items = document.querySelectorAll('.mosaico-img');
+  const N = items.length;
+  let cfIdx = 0, lbIdx = 0, lbRot = 0, lbZoom = false;
+  let cfTimer = null, toastT = null;
+
+  function buildCF(){
+    const track = document.getElementById('cf-track');
+    const dots = document.getElementById('cf-dots');
+    track.innerHTML = ''; dots.innerHTML = '';
+    items.forEach((img, i) => {
+      const card = document.createElement('div');
+      card.className = 'cf-card';
+      card.innerHTML = '<img src="'+img.src+'">';
+      card.onclick = () => { cfIdx = i; updateCF(); openLB(i); };
+      track.appendChild(card);
+      const dot = document.createElement('button');
+      dot.className = 'cf-dot';
+      dot.onclick = (e) => { e.stopPropagation(); cfIdx = i; updateCF(); };
+      dots.appendChild(dot);
+    });
+    updateCF();
+  }
+
+  function updateCF(){
+    const cards = document.querySelectorAll('.cf-card');
+    const dots = document.querySelectorAll('.cf-dot');
+    cards.forEach((c, i) => {
+      let diff = i - cfIdx;
+      if (diff > N/2) diff -= N;
+      if (diff < -N/2) diff += N;
+      const absD = Math.abs(diff);
+      let tx, tz, ry, sc, op, z;
+      if (diff === 0) {
+        tx = 0; tz = 0; ry = 0; sc = 1; op = 1; z = 5;
+      } else {
+        const sign = diff > 0 ? 1 : -1;
+        tx = sign * (180 + absD * 10);
+        tz = -absD * 120;
+        ry = sign * -30;
+        sc = Math.max(0.5, 1 - absD * 0.15);
+        op = Math.max(0.2, 1 - absD * 0.25);
+        z = 5 - absD;
+      }
+      c.style.transform = 'translateX('+tx+'px) translateZ('+tz+'px) rotateY('+ry+'deg) scale('+sc+')';
+      c.style.opacity = op;
+      c.style.zIndex = z;
+      c.classList.toggle('active', diff === 0);
+      if (absD > 3) c.style.opacity = 0;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === cfIdx));
+    document.getElementById('cf-counter').textContent = (cfIdx+1)+' / '+N;
+  }
+
+  window.cfMove = function(dir){
+    cfIdx = (cfIdx + dir + N) % N;
+    updateCF();
+  };
+
+  function startAutoplay(){
+    if(cfTimer) clearInterval(cfTimer);
+    cfTimer = setInterval(() => { cfIdx = (cfIdx + 1) % N; updateCF(); }, 3500);
+  }
+
+  let touchX = 0;
+  const wrap = document.getElementById('cf-wrap');
+  wrap.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+  wrap.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx) > 40) cfMove(dx > 0 ? -1 : 1);
+    startAutoplay();
+  }, {passive:true});
+
+  function openLB(i){ lbIdx=i; lbRot=0; lbZoom=false; updateLB(); document.getElementById('lb').classList.add('on'); document.body.style.overflow='hidden'; }
+  
+  function lbClose(){ document.getElementById('lb').classList.remove('on'); document.body.style.overflow=''; lbZoom=false; document.getElementById('lb-img').classList.remove('zoomed'); document.getElementById('lb-img').style.transform=''; }
+  window.lbClose = lbClose; /* CORRECCIÓN ACÁ */
+
+  function lbNav(dir){ const img=document.getElementById('lb-img'); img.style.opacity='0'; img.style.transform='scale(0.95)'; setTimeout(()=>{ lbIdx=(lbIdx+dir+N)%N; lbRot=0; lbZoom=false; img.classList.remove('zoomed'); updateLB(); requestAnimationFrame(()=>{img.style.opacity='1';img.style.transform='scale(1)';}); },160); }
+  window.lbNav = lbNav; /* CORRECCIÓN ACÁ */
+
+  function lbRotFn(g){ lbRot=(lbRot+g)%360; if(lbRot===-270)lbRot=90; if(lbRot===270)lbRot=-90; applyLBTransform(); const b=document.getElementById('rot-badge'); b.textContent=lbRot+'°'; b.classList.toggle('show',lbRot!==0); toast('Rotación: '+lbRot+'°'); }
+  window.lbRot=lbRotFn;
+  function lbRotReset(){ lbRot=0; applyLBTransform(); document.getElementById('rot-badge').classList.remove('show'); toast('Rotación reseteada'); }
+  window.lbRotReset=lbRotReset;
+  function lbToggleZoom(){ lbZoom=!lbZoom; const img=document.getElementById('lb-img'); img.classList.toggle('zoomed',lbZoom); img.style.transition='transform 0.45s cubic-bezier(0.23,1,0.32,1)'; img.style.transform=lbZoom?'scale(2)':'scale(1)'; toast(lbZoom?'Zoom activado':'Zoom desactivado'); }
+  window.lbToggleZoom=lbToggleZoom;
+  function applyLBTransform(){ const img=document.getElementById('lb-img'); const s=lbZoom?2:1; img.style.transition='transform 0.45s cubic-bezier(0.23,1,0.32,1)'; img.style.transform='scale('+s+') rotate('+lbRot+'deg)'; }
+  function updateLB(){ const img=items[lbIdx]; const mi=document.getElementById('lb-img'); mi.src=img.dataset.full||img.src; mi.style.transform='scale(1)'; mi.classList.remove('zoomed'); lbZoom=false; document.getElementById('lb-counter').textContent=(lbIdx+1)+' / '+N; document.getElementById('lb-bar').style.width=((lbIdx+1)/N*100)+'%'; document.getElementById('rot-badge').classList.remove('show'); }
+  function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),1400); }
+
+  document.addEventListener('keydown', e => {
+    if(!document.getElementById('lb').classList.contains('on')){
+      if(e.key==='ArrowLeft'){cfMove(-1);e.preventDefault();}
+      if(e.key==='ArrowRight'){cfMove(1);e.preventDefault();}
+      return;
+    }
+    switch(e.key){
+      case 'Escape':lbClose();break;
+      case 'ArrowLeft':lbNav(-1);break;
+      case 'ArrowRight':lbNav(1);break;
+      case 'r':case 'R':lbRotFn(-90);break;
+      case 't':case 'T':lbRotFn(90);break;
+      case '0':lbRotReset();break;
+      case 'z':case 'Z':lbToggleZoom();break;
+    }
+  });
+
+  let lbTouchX=0;
+  document.getElementById('lb').addEventListener('touchstart',e=>{lbTouchX=e.touches[0].clientX;},{passive:true});
+  document.getElementById('lb').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-lbTouchX; if(Math.abs(dx)>50) lbNav(dx>0?-1:1);},{passive:true});
+  document.getElementById('lb').addEventListener('click',e=>{if(e.target===document.getElementById('lb'))lbClose();});
+
+  buildCF(); startAutoplay();
+})();
+</script>
+```
+
+</p>
+
+Frente a la expansión de las tecnologías digitales, las ciencias sociales trascienden la observación pasiva para configurarse como espacios de resistencia reflexiva y operativa en territorios y contextos específicos. La especificidad de la intervención profesional reside en la capacidad de restituir la densidad de lo humano y la singularidad de las trayectorias, dimensiones que la abstracción del dato, por más exhaustivo que resulte, no logra asimilar ni significar plenamente. Esta tensión entre el patrón algorítmico y la realidad situada constituye el eje de las prácticas que se analizan a continuación.
+
+</p>
+:::
+
+# La ciencia de datos en terreno: experiencias, tensiones y posibilidades
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+
+La escala sin precedentes que ha alcanzado la producción de datos, sumada a la capacidad cada vez mayor de las herramientas computacionales para procesarlos, está propiciando experiencias que articulan ese tratamiento de la información con el abordaje de problemas sociales. Estas iniciativas, todavía dispersas y de alcance desigual, comienzan a delinear un territorio en el que convergen lógicas distintas, la de la eficiencia algorítmica y la de la comprensión situada de lo social, la del dato agregado y la del relato singular. Esa convergencia no es automática ni se resuelve por sí sola. Exige un trabajo deliberado de traducción entre lenguajes, tiempos y criterios de validez que no siempre coinciden. La tensión entre estas lógicas, lejos de ser un obstáculo, constituye precisamente el núcleo del desafío. Construir estas articulaciones supone no anular las especificidades de cada campo, sino ponerlas en diálogo con un horizonte común: la mejora de las condiciones de vida de las poblaciones.
+
+</p>
+
+</p>
+
+Un ejemplo ilustrativo de esta articulación compleja lo constituye la herramienta desarrollada por el Laboratorio de Innovación e Inteligencia Artificial de la Facultad de Derecho de la UBA y la FCE de la UNC. Se trata de un sistema que procesa imágenes de expedientes digitalizados con el objetivo de identificar, dentro del sistema judicial nacional, aquellos casos de violencia de género que presentan un riesgo alto, buscando así habilitar una detección más ágil y una respuesta más oportuna.
+
+</p>
+
+</p>
+
+Si bien se presenta como una iniciativa valiosa y promisoria, su despliegue conlleva nudos problemáticos que exigen un análisis riguroso: ¿qué sesgos podrían estar inscriptos en los datos utilizados para entrenar el modelo?, ¿de qué manera se garantiza que la celeridad técnica no derive en una simplificación de la complejidad inherente a cada situación? y/o ¿cuál es el alcance del criterio profesional frente a la prescripción automatizada? Estas inquietudes no pretenden objetar el avance tecnológico, sino que reclaman una implementación regulada por mecanismos de transparencia y participación que impidan que la eficiencia instrumental desplace la dimensión ético-política y la sensibilidad ante lo singular, rasgos indispensables en el abordaje de la violencia de género.
+
+</p>
+
+</p>
+
+En el dominio educativo, los sistemas de alerta temprana (SAT) se consolidan como dispositivos estratégicos para la prevención del abandono escolar. La eficacia de estos sistemas radica en su capacidad para identificar a tiempo trayectorias en riesgo, permitiendo el diseño de intervenciones que recuperan la singularidad del estudiante frente a los determinantes generales del fracaso educativo. De este modo, el dato predictivo no se agota en la métrica, sino que funciona como un insumo para una respuesta institucional proactiva y situada, capaz de atender a las condiciones particulares que atraviesa cada sujeto en su proceso de aprendizaje. Esta herramienta, cuya implementación ya cuenta con con un recorrido consolidado en Estados Unidos y diversos países europeos, ha comenzado a ganar terreno en nuestra región en los últimos años. Chile, Uruguay, Perú y Colombia son algunos de los casos que vienen utilizando este tipo de sistemas para fortalecer las trayectorias escolares de sus estudiantes. En Argentina, en cambio, el desarrollo de los SAT es más reciente y encuentra su principal impulso en el contexto posterior a la pandemia, que visibilizó con crudeza las desigualdades en el acceso y la continuidad educativa.
+
+</p>
+
+</p>
+
+Una experiencia paradigmática en la intersección entre datos y territorio es el **Registro Nacional de Barrios Populares (RENABAP)**, el cual sistematiza información sobre 6.467 barrios populares en todo el país. Su origen remite a un relevamiento impulsado en 2016 por organizaciones sociales y territoriales, quienes identificaron inicialmente 4.100 barrios y presentaron dicha información como insumo crítico para la sanción de la Ley 27.453. Desde entonces, este registro se ha consolidado como una de las fuentes de información pública más relevantes sobre el hábitat popular en la Argentina, permitiendo una visibilización de gran escala que anteriormente resultaba inabarcable (Elorza et al., 2019).
+
+</p>
+
+</p>
+
+Sin embargo, el alcance del RENABAP excede la dimensión estrictamente técnica del relevamiento para situarse en una dimensión de tecnología política. Registrar no es un acto neutro de recolección de datos, implica delimitar qué existe para el Estado, definiendo quiénes son reconocidos y sobre qué bases se diseñarán las políticas de integración. Un barrio que ingresa al registro abandona la categoría de asentamiento informal indistinguible para convertirse en una unidad reconocida, con límites definidos y coordenadas propias.
+
+</p>
+
+</p>
+
+Lo determinante aquí no es solo el dispositivo que posibilita este reconocimiento, sino el uso que se le asigna en los circuitos de decisión: la georreferenciación puede ser la puerta hacia obras de infraestructura o quedar reducida a un dato inerte en un tablero de gestión si no se articula con la lectura situada de quienes habitan el territorio. En este sentido, la experiencia del **RENABAP** demuestra que el registro no es un acto neutro, sino una herramienta para inscribir la precariedad en la política pública desde un **"registro propio"** donde las organizaciones sociales actúan como gestores directos, disputando así la organización misma de lo público (Arias, 2022). Para ilustrar esta articulación necesaria entre la escala general y lo singular, el siguiente mapa interactivo destaca tres municipios de la provincia de Buenos Aires, sus respectivos barrios populares e información de estos.
+
+</p>
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# --- Carga de librerías ---
+library(tidyverse)
+library(sf)
+library(leaflet)
+library(leaflet.extras)
+library(RColorBrewer)
+
+# --- Lectura de datos ---
+bpop <- st_read("C:/Users/chris/Downloads/bases_datos/barriospop.geojson",
+                stringsAsFactors = FALSE, quiet = TRUE)
+
+# --- Función de corrección de texto ---
+corregir_texto <- function(texto) {
+  if (is.character(texto)) {
+    texto <- gsub("ÃƒÂ¡", "á", texto, fixed = TRUE)
+    texto <- gsub("ÃƒÂ©", "é", texto, fixed = TRUE)
+    texto <- gsub("ÃƒÂ­", "í", texto, fixed = TRUE)
+    texto <- gsub("ÃƒÂ³", "ó", texto, fixed = TRUE)
+    texto <- gsub("ÃƒÂº", "ú", texto, fixed = TRUE)
+    texto <- gsub("ÃƒÂ±", "ñ", texto, fixed = TRUE)
+    texto <- gsub("Ãƒâ€˜", "Ñ", texto, fixed = TRUE)
+    texto <- gsub("Ãƒâ€°", "É", texto, fixed = TRUE)
+    texto <- gsub("Ãƒ'", "Ó", texto, fixed = TRUE)
+    texto <- gsub("ÃƒÅ¡", "Ú", texto, fixed = TRUE)
+    texto <- gsub("Ãƒ\u0081", "Á", texto, fixed = TRUE)
+    texto <- gsub("Â", "", texto, fixed = TRUE)
+    texto <- gsub("MarabÃÂ³", "Marabá", texto, fixed = TRUE)
+    texto <- gsub("JosÃƒÂ©", "José", texto, fixed = TRUE)
+    texto <- gsub("MarÃƒÂ­a", "María", texto, fixed = TRUE)
+  }
+  return(texto)
+}
+
+# --- Aplicar corrección ---
+columnas_texto <- names(bpop)[sapply(bpop, is.character)]
+for (col in columnas_texto) {
+  bpop[[col]] <- corregir_texto(bpop[[col]])
+}
+
+# --- Asegurar columnas ---
+bpop$nombre_barrio <- unlist(lapply(bpop$nombre_barrio, function(x) if (is.null(x)) NA_character_ else as.character(x)))
+for (col in names(bpop)) {
+  if (col != "geometry" && is.list(bpop[[col]])) {
+    bpop[[col]] <- unlist(lapply(bpop[[col]], function(x) if (is.null(x)) NA_character_ else as.character(x)))
+  }
+}
+
+# --- Filtrar zona ---
+zona <- c("Luján", "San Miguel", "Moreno", "General Rodríguez")
+bzona <- bpop %>%
+  filter(departamento %in% zona) %>%
+  mutate(
+    cantidad_familias_aproximada    = ifelse(is.na(cantidad_familias_aproximada), 0, cantidad_familias_aproximada),
+    cantidad_viviendas_aproximadas  = ifelse(is.na(cantidad_viviendas_aproximadas), 0, cantidad_viviendas_aproximadas),
+    superficie_m2                   = ifelse(is.na(superficie_m2), 0, superficie_m2),
+    clasificacion_barrio            = ifelse(is.na(clasificacion_barrio), "Sin dato", clasificacion_barrio),
+    agua_corriente                  = ifelse(is.na(agua_corriente), "Sin dato", agua_corriente),
+    energia_electrica               = ifelse(is.na(energia_electrica), "Sin dato", energia_electrica),
+    decada_de_creacion              = ifelse(is.na(decada_de_creacion), "Sin dato", decada_de_creacion)
+  )
+
+# --- Límites departamentales ---
+dptos_full <- st_read("C:/Users/chris/Downloads/bases_datos/departamento.json",
+                      stringsAsFactors = FALSE, quiet = TRUE)
+
+corregir_encoding <- function(texto) {
+  if (is.character(texto)) {
+    texto <- iconv(texto, from = "latin1", to = "UTF-8", sub = "?")
+    texto <- corregir_texto(texto)
+  }
+  return(texto)
+}
+
+cols_dptos <- names(dptos_full)[sapply(dptos_full, is.character)]
+for (col in cols_dptos) {
+  dptos_full[[col]] <- corregir_encoding(dptos_full[[col]])
+}
+
+dptos_zona <- dptos_full %>%
+  filter(in1 %in% c("06497", "06560", "06760", "06364")) %>%
+  mutate(fna = case_when(
+    in1 == "06497" ~ "Luján",
+    in1 == "06560" ~ "Moreno",
+    in1 == "06760" ~ "San Miguel",
+    in1 == "06364" ~ "General Rodríguez"
+  ))
+
+# --- Paletas ---
+colores_familias <- c("#00E5FF", "#00FF87", "#FFEA00", "#FF9100", "#FF2D78", "#B026FF")
+pal_familias      <- colorNumeric(palette = colores_familias, domain = bzona$cantidad_familias_aproximada)
+pal_viviendas     <- colorNumeric(palette = "YlGnBu", domain = bzona$cantidad_viviendas_aproximadas)
+pal_superficie    <- colorNumeric(palette = "BuPu",   domain = bzona$superficie_m2)
+pal_clasificacion <- colorFactor(palette = "Set1",    domain = bzona$clasificacion_barrio)
+pal_agua          <- colorFactor(palette = "Paired",  domain = bzona$agua_corriente)
+pal_energia       <- colorFactor(palette = "Dark2",   domain = bzona$energia_electrica)
+pal_decada        <- colorFactor(palette = "Set2",    domain = bzona$decada_de_creacion)
+
+# --- Popup ---
+popup_html <- paste0(
+  "<strong>Barrio: </strong>", bzona$nombre_barrio,
+  "<br><b>Municipio: </b>", bzona$departamento,
+  "<br><b>Clasificación: </b>", bzona$clasificacion_barrio,
+  "<br><b>Familias aprox.: </b>", bzona$cantidad_familias_aproximada,
+  "<br><b>Viviendas aprox.: </b>", bzona$cantidad_viviendas_aproximadas,
+  "<br><b>Superficie (m2): </b>", bzona$superficie_m2,
+  "<br><b>Agua: </b>", bzona$agua_corriente,
+  "<br><b>Energía: </b>", bzona$energia_electrica,
+  "<br><b>Década de creación: </b>", bzona$decada_de_creacion
+)
+
+# --- Encuadre inicial sobre los barrios ---
+bbox_zona <- as.numeric(st_bbox(bzona))
+
+# --- Fondos de mapa sólidos embebidos (funcionan offline; los tiles online no cargan sin conexión) ---
+color_a_datauri <- function(hexcolor, size = 64) {
+  tmp <- tempfile(fileext = ".png")
+  png(tmp, width = size, height = size)
+  par(mar = c(0, 0, 0, 0), xaxs = "i", yaxs = "i")
+  plot.new()
+  plot.window(xlim = c(0, 1), ylim = c(0, 1))
+  rect(-0.1, -0.1, 1.1, 1.1, col = hexcolor, border = NA)
+  dev.off()
+  raw <- readBin(tmp, "raw", file.size(tmp))
+  paste0("data:image/png;base64,", base64enc::base64encode(raw))
+}
+tile_oscuro <- color_a_datauri("#10141c")
+tile_claro  <- color_a_datauri("#e9e4d6")
+
+# --- Crear mapa y devolverlo para que Quarto lo incruste ---
+leaflet(bzona) %>%
+  setView(lng = -58.876237758407086, lat = -34.60075913531718, zoom = 12) %>%
+  addTiles(urlTemplate = tile_oscuro, options = tileOptions(minZoom = 0, maxZoom = 19), group = "Mapa oscuro (offline)") %>%
+  addTiles(urlTemplate = tile_claro, options = tileOptions(minZoom = 0, maxZoom = 19), group = "Mapa claro (offline)") %>%
+
+  addPolygons(fillColor = ~pal_familias(cantidad_familias_aproximada),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.88,
+              popup = popup_html, group = "Familias aproximadas") %>%
+  addPolygons(fillColor = ~pal_viviendas(cantidad_viviendas_aproximadas),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.75,
+              popup = popup_html, group = "Viviendas aproximadas") %>%
+  addPolygons(fillColor = ~pal_superficie(superficie_m2),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.75,
+              popup = popup_html, group = "Superficie (m2)") %>%
+  addPolygons(fillColor = ~pal_clasificacion(clasificacion_barrio),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.75,
+              popup = popup_html, group = "Clasificación de barrio") %>%
+  addPolygons(fillColor = ~pal_agua(agua_corriente),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.75,
+              popup = popup_html, group = "Acceso a agua") %>%
+  addPolygons(fillColor = ~pal_energia(energia_electrica),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.75,
+              popup = popup_html, group = "Acceso a energía") %>%
+  addPolygons(fillColor = ~pal_decada(decada_de_creacion),
+              color = "white", weight = 0.4, opacity = 1, fillOpacity = 0.75,
+              popup = popup_html, group = "Década de creación") %>%
+  
+  addPolygons(data = dptos_zona, color = "orange", weight = 1.2, fill = FALSE,
+              popup = ~paste("<b>Municipio: </b>", fna), group = "Límites departamentales") %>%
+  
+  addLegend(pal = pal_familias, values = bzona$cantidad_familias_aproximada,
+            title = "Familias aprox.", position = "bottomright", group = "Familias aproximadas") %>%
+  addLegend(pal = pal_viviendas, values = bzona$cantidad_viviendas_aproximadas,
+            title = "Viviendas aprox.", position = "bottomright", group = "Viviendas aproximadas") %>%
+  addLegend(pal = pal_superficie, values = bzona$superficie_m2,
+            title = "Superficie (m2)", position = "bottomright", group = "Superficie (m2)") %>%
+  addLegend(pal = pal_clasificacion, values = bzona$clasificacion_barrio,
+            title = "Clasificación", position = "bottomright", group = "Clasificación de barrio") %>%
+  addLegend(pal = pal_agua, values = bzona$agua_corriente,
+            title = "Acceso a agua", position = "bottomright", group = "Acceso a agua") %>%
+  addLegend(pal = pal_energia, values = bzona$energia_electrica,
+            title = "Acceso a energía", position = "bottomright", group = "Acceso a energía") %>%
+  addLegend(pal = pal_decada, values = bzona$decada_de_creacion,
+            title = "Década de creación", position = "bottomright", group = "Década de creación") %>%
+  
+  addLayersControl(
+    baseGroups = c("Mapa oscuro (offline)", "Mapa claro (offline)"),
+    overlayGroups = c("Familias aproximadas", "Viviendas aproximadas", "Superficie (m2)",
+                      "Clasificación de barrio", "Acceso a agua", "Acceso a energía",
+                      "Década de creación", "Límites departamentales"),
+    options = layersControlOptions(collapsed = FALSE),
+    position = "bottomleft"
+  ) %>%
+  hideGroup(c("Viviendas aproximadas", "Superficie (m2)", "Clasificación de barrio",
+              "Acceso a agua", "Acceso a energía", "Década de creación")) %>%
+  addMiniMap(tiles = tile_oscuro, toggleDisplay = TRUE, position = "bottomleft") %>%
+  addResetMapButton()
+```
+
+</p>
+
+Más allá del RENABAP, por ejemplo, instrumentos como el mapa de extranjerización de la tierra (Observatorio de Tierras-CONICET/UBA) consolidan al dato georreferenciado como un componente relevante en la disputa por la soberanía del suelo. Estas tensiones afloraron en el reciente debate sobre el proyecto de 'Inviolabilidad de la Propiedad Privada', que impulsaba una reforma regresiva de la Ley 27.453. Al intentar suprimir la expropiación, el fideicomiso de tierras y la protección contra desalojos, la iniciativa amenazaba con desmantelar los pilares del esquema de integración socio-urbana vigente. Sin embargo, una férrea resistencia política y social forzó el retiro de ese capítulo en las comisiones del Senado. Este episodio ratifica que la dimensión técnica del registro no es un proceso neutral ni clausurado, sino un territorio en disputa sujeto a la deliberación colectiva, lo cual nos sitúa ante un interrogante fundamental:
+
+</p>
+:::
+
+# ¿Quién queda del otro lado del dato?
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+
+El interrogante que abre este apartado trasciende lo retórico para cuestionar un presupuesto profundamente arraigado: la supuesta neutralidad de los datos como entidades objetivas que aguardan ser recolectadas. Lejos de emerger de un vacío aséptico, los datos son producidos, seleccionados y significados en procesos donde convergen decisiones humanas, sesgos ideológicos y marcos teóricos que rara vez resultan explícitos. Al desmitificar esta transparencia técnica, se advierte que el dato no funciona como un reflejo de lo social, sino como una representación construida que define qué dimensiones de la vida humana serán visibilizadas por el diseño algorítmico. Lo que está en juego no es la herramienta técnica en sí misma. Es el modo en que esa herramienta termina incorporándose a los circuitos donde se produce conocimiento y se deciden políticas sobre la vida de las personas. Un algoritmo mal calibrado puede corregirse; lo que resulta más difícil de revertir es haber delegado en él la deliberación política, el conocimiento construido en el territorio y el contacto con quienes efectivamente atraviesan esas políticas.
+
+</p>
+
+</p>
+
+Deviene un imperativo la disposición a interrogar permanentemente las condiciones de producción del conocimiento, consolidándose como un ejercicio de vigilancia epistemológica ineludible para la apropiación crítica de la ciencia de datos por parte de las disciplinas sociales. El rechazo pretencioso de estas herramientas resulta tan infructuoso como su adopción acrítica; la responsabilidad de las ciencias sociales reside en disputar el diseño de los dispositivos tecnológicos, tensionando los supuestos que los sustentan y participando activamente en la arquitectura de las categorías que clasifican a la población. Un profesional que se reduce al rol de ejecutor administrativo, limitándose a cargar información en sistemas que no contribuyó a pensar, difícilmente podrá sostener un posicionamiento crítico frente a la prescripción automatizada de sus resultados. La inteligencia artificial no es neutral ni aséptica; investigaciones como 'Gender Shades'[^5] ya han evidenciado cómo los algoritmos pueden cristalizar y agravar desigualdades preexistentes cuando no son interrogados desde una mirada atenta a la diferencia y a las dinámicas de poder.
+
+</p>
+
+</p>
+
+La interpelación de los algoritmos trasciende la abstracción reflexiva para traducirse en la praxis cotidiana de los profesionales de las ciencias sociales. Si bien no es imperativo que los investigadores alcancen un dominio experto en la arquitectura del aprendizaje automático, resulta ineludible comprender su lógica operativa, discernir sus límites y detectar la cristalización de sesgos en los modelos. En este sentido, la ciencia de datos no se agota en el código, el núcleo de la intervención reside en las decisiones previas a la programación: qué interrogantes formular, qué variables resultan significativas y qué dilemas éticos emergen cuando el diseño predictivo incide sobre trayectorias vitales concretas. El pensamiento crítico no opera como un freno a la innovación, sino como una salvaguarda frente a formas sofisticadas de control o exclusión en lo que Byung-Chul Han (2022) denomina el régimen de la información, donde algoritmos e inteligencia artificial moldean los procesos sociales y políticos. Ante este escenario, el desafío disciplinar consiste en sostener una doble vigilancia: la apropiación soberana de estas herramientas y la preservación de los fundamentos ontológicos de las ciencias sociales.
+
+</p>
+
+</p>
+
+Esta apropiación crítica habilita un horizonte de posibilidades técnicas antes inalcanzables. La ciencia de datos provee instrumentos que, desde la programación clásica hasta el aprendizaje profundo, permiten detectar patrones estructurales en volúmenes de información cuya complejidad excede la percepción humana. No obstante, la labor sustantiva rara vez comienza en el modelado, se sitúa mayoritariamente en la limpieza y curaduría de la información, instancias decisivas para mitigar errores o interpretaciones sesgadas en el resultado final. De allí la importancia de intervenir activamente en el procesamiento, desplazando las advertencias genéricas sobre los riesgos de la IA para habitar las soluciones técnicas desde la práctica profesional. Experiencias como la detección de riesgo en violencia de género, los sistemas de alerta temprana escolar y la georreferenciación de barrios populares demuestran que la convergencia entre reflexión y acción técnica es un territorio ya explorado. La consolidación de este camino depende de un posicionamiento ético que no pierda de vista el sentido último de la intervención: la ampliación de derechos y la mejora de las condiciones de vida de las poblaciones en situación de vulnerabilidad.
+
+</p>
+:::
+
+[^5]: </p>
+
+    Investigación que evidenció sesgos raciales y de género en sistemas comerciales de IA (Microsoft, IBM, Amazon). Los resultados mostraron que las **mujeres de piel oscura son clasificadas erróneamente con mayor frecuencia**, registrando brechas de precisión de hasta el 31% en comparación con los hombres de piel clara (Fernández Álvarez, 2021).
+
+    </p>
+
+
+::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+Más allá de los desafíos formativos ya señalados, lo decisivo es avanzar hacia prácticas de co creación que permitan a las ciencias sociales participar activamente en el diseño de tecnologías públicas. Ese ejercicio de resistencia y producción colectiva se materializa en iniciativas como R Ladies, Mujeres en Tecnología y Las de Sistemas, espacios comunitarios que muestran cómo la intersección entre datos, tecnología y ciencias sociales constituye un territorio de aprendizaje situado y de construcción colaborativa de saberes. En esta clave, la convergencia entre ciencias sociales y ciencia de datos deja de ser un requisito de actualización técnica para convertirse en una condición política: solo así la innovación puede traducirse en mayor equidad y acceso a derechos, preservando la densidad de lo humano frente al diseño algorítmico.
+</p>
+:::
+
+```{r, echo=FALSE, results='asis'}
+# --- Botones de comunidades: RLadies incrustada en base64 ---
+library(base64enc)
+setwd("C:/Users/chris/Downloads/Projects_R/TS-CD")
+
+pic_rladies <- ""
+pic_met <- ""
+pic_lasdesistemas <- ""
+if (file.exists("RLadies.png")) {
+  raw_imagen <- readBin("RLadies.png", "raw", as.integer(file.size("RLadies.png")))
+  pic_rladies <- paste0("data:image/png;base64,", base64encode(raw_imagen))
+} else {
+  cat('<!-- RLadies.png no encontrado -->\n')
+}
+if (file.exists("MujeresET.png")) {
+  raw_imagen <- readBin("MujeresET.png", "raw", as.integer(file.size("MujeresET.png")))
+  pic_met <- paste0("data:image/png;base64,", base64encode(raw_imagen))
+} else {
+  cat('<!-- MujeresET.png no encontrado -->\n')
+}
+if (file.exists("lasdesistemas.png")) {
+  raw_imagen <- readBin("lasdesistemas.png", "raw", as.integer(file.size("lasdesistemas.png")))
+  pic_lasdesistemas <- paste0("data:image/png;base64,", base64encode(raw_imagen))
+} else {
+  cat('<!-- lasdesistemas.png no encontrado -->\n')
+}
+
+css_botones <- '<style>
+.links-grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin:20px 0 8px}
+.link-card{
+  position:relative;display:flex;align-items:center;gap:14px;
+  width:100%;max-width:360px;padding:18px;
+  background:#fff;border:1px solid #e2e8f0;border-radius:16px;
+  text-decoration:none;color:inherit;overflow:hidden;
+  box-shadow:0 4px 14px rgba(15,23,42,.06);
+  transition:all .3s ease;font-family:"Inter",sans-serif;
+}
+.link-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(135deg,#6366f1,#a855f7);opacity:0;transition:opacity .3s ease}
+.link-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(99,102,241,.18);border-color:#c7d2fe}
+.link-card:hover::before{opacity:1}
+.link-ic{flex:0 0 auto;width:64px;height:64px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:linear-gradient(135deg,#eef2ff,#f5f3ff);border:1px solid #e2e8f0}
+.link-ic img{width:100%;height:100%;object-fit:cover;display:block}
+.link-ic svg{width:30px;height:30px;stroke:#6366f1;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.link-info{flex:1;min-width:0}
+.link-info .link-title{display:block;margin:0 0 3px;font-size:1em;font-weight:600;color:#0f172a}
+.link-info p{margin:0;font-size:0.8em;color:#64748b;line-height:1.45}
+.link-arrow{flex:0 0 auto;color:#a855f7;font-size:1.2em;font-weight:600;transition:transform .3s ease}
+.link-card:hover .link-arrow{transform:translateX(4px)}
+</style>'
+
+card_instagram <- if (nzchar(pic_lasdesistemas)) {
+  paste0('<a class="link-card" href="https://www.instagram.com/lasdesistemas/" target="_blank" rel="noopener noreferrer" data-description="Comunidad de mujeres y diversidades en sistemas, presente en Instagram"><span class="link-ic"><img src="', pic_lasdesistemas, '" alt="Las de Sistemas"></span><span class="link-info"><span class="link-title">Las de Sistemas</span><p>Instagram &middot; Comunidad de mujeres y disidencias en tecnología; comparte recursos, eventos y contenidos para fomentar su participación en sistemas.</p></span><span class="link-arrow">&rarr;</span></a>')
+} else {
+  '<a class="link-card" href="https://www.instagram.com/lasdesistemas/" target="_blank" rel="noopener noreferrer" data-description="Comunidad de mujeres y diversidades en sistemas, presente en Instagram"><span class="link-ic"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="#6366f1" stroke="none"/></svg></span><span class="link-info"><span class="link-title">Las de Sistemas</span><p>Instagram &middot; Comunidad de mujeres y disidencias en tecnología; comparte recursos, eventos y contenidos para fomentar su participación en sistemas.</p></span><span class="link-arrow">&rarr;</span></a>'
+}
+
+card_mujeres <- if (nzchar(pic_met)) {
+  paste0('<a class="link-card" href="https://mujeresentecnologia.org/" target="_blank" rel="noopener noreferrer" data-description="ONG que impulsa la participación de mujeres en tecnología"><span class="link-ic"><img src="', pic_met, '" alt="Mujeres en Tecnología"></span><span class="link-info"><span class="link-title">Mujeres en Tecnología</span><p>Web &middot; ONG argentina que impulsa la participación de mujeres en tecnología mediante becas, mentorías y programas de formación.</p></span><span class="link-arrow">&rarr;</span></a>')
+} else {
+  '<a class="link-card" href="https://mujeresentecnologia.org/" target="_blank" rel="noopener noreferrer" data-description="ONG que impulsa la participación de mujeres en tecnología"><span class="link-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/></svg></span><span class="link-info"><span class="link-title">Mujeres en Tecnología</span><p>Web &middot; ONG argentina que impulsa la participación de mujeres en tecnología mediante becas, mentorías y programas de formación.</p></span><span class="link-arrow">&rarr;</span></a>'
+}
+
+card_rladies <- if (nzchar(pic_rladies)) {
+  paste0('<a class="link-card" href="https://rladiesba.netlify.app/" target="_blank" rel="noopener noreferrer" data-description="Somos RLadies Buenos Aires, el capítulo local de RLadies global, una organización mundial que promueve la Diversidad de Género en la comunidad R"><span class="link-ic"><img src="', pic_rladies, '" alt="R-Ladies Buenos Aires"></span><span class="link-info"><span class="link-title">R-Ladies Buenos Aires</span><p>Web &middot; Capítulo local de R-Ladies Global, que promueve la diversidad de género en la comunidad del lenguaje R mediante encuentros y talleres.</p></span><span class="link-arrow">&rarr;</span></a>')
+} else {
+  '<!-- Sin imagen para R-Ladies -->'
+}
+
+detalles_comunidades <- '
+<details class="tomi-info">
+  <summary>Sobre Las de Sistemas (información disponible sin conexión)</summary>
+  <div class="tomi-info-body">
+    <p>Las de Sistemas es una comunidad argentina nacida en 2017 que trabaja para visibilizar y potenciar a mujeres, lesbianas, travestis, trans y no binaries en la industria de la tecnología.</p>
+    <p>Organiza <strong>FemIT conf</strong>, una conferencia técnica gratuita y abierta con perspectiva de género, con charlas dictadas por mujeres, lesbianas, trans, travestis y no binaries de la industria. También impulsó la campaña <strong>#NosPasaALasDeSistemas</strong> para visibilizar los desafíos que enfrentan las mujeres en el sector.</p>
+    <p>Su actividad principal se concentra en Instagram, donde comparte contenido organizado en secciones como #NoHayCisTema, Otres en STEAM, #GenderScan y Científicas.</p>
+  </div>
+</details>
+
+<details class="tomi-info">
+  <summary>Sobre Mujeres en Tecnología (información disponible sin conexión)</summary>
+  <div class="tomi-info-body">
+    <p>Mujeres en Tecnología (MeT) es una organización argentina con más de siete años de trabajo dedicados a disminuir las brechas de género en tecnología, creando comunidad, brindando capacitaciones y promoviendo el cambio cultural.</p>
+    <p>Desarrolla cuatro líneas de acción: formación técnica en tecnologías con demanda laboral; cambio cultural en ambientes de trabajo mediante talleres y diagnósticos organizacionales; un espacio de comunidad para mujeres y diversidades; y un portal de empleo que conecta talentos con empresas.</p>
+    <p>Entre sus iniciativas se destacan <strong>FuturaCamp</strong> (campamento emprendedor), <strong>WiDS</strong> (conferencias de Ciencia de Datos), <strong>MeTLabs</strong> (grupos de estudio colaborativos) y <strong>WikiMeT</strong> (plataforma educativa). También publica investigaciones propias sobre la brecha de género en el sector tecnológico.</p>
+  </div>
+</details>
+
+<details class="tomi-info">
+  <summary>Sobre R-Ladies Buenos Aires (información disponible sin conexión)</summary>
+  <div class="tomi-info-body">
+    <p>R-Ladies Buenos Aires es el capítulo local de R-Ladies Global, una organización que promueve la diversidad de género en la comunidad del lenguaje de programación R.</p>
+    <p>Busca crear una atmósfera amigable para personas de géneros subrepresentados en esta comunidad —mujeres cis y trans, hombres trans, personas no binarias y agénero—, sin importar si son principiantes o usuarias avanzadas de R.</p>
+    <p>Organiza meetups, talleres y charlas sobre R y ciencia de datos para intercambiar conocimiento y crear una red de contactos local y global. El capítulo se rige por un código de conducta que garantiza espacios libres de acoso, tanto presenciales como virtuales.</p>
+  </div>
+</details>
+'
+
+cat('```{=html}\n')
+cat(css_botones)
+cat('<div class="links-grid">\n')
+cat(card_instagram, "\n\n")
+cat(card_mujeres, "\n\n")
+cat(card_rladies, "\n\n")
+cat('</div>\n')
+cat(detalles_comunidades)
+cat('```\n')
+```
+
+</p>
+
+::: {#nota-autor style="font-size:0.85em; margin-top:2.5em; padding-top:0.6em; border-top:1px solid #e2e8f0;"}
+<sup>\*</sup> Licenciado en Trabajo Social y en Ciencia Política. Magíster en Políticas Públicas y Especialista en Ciencia de Datos. Docente universitario.
+:::
+
+```{=html}
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var n = document.getElementById('nota-autor');
+  var app = document.getElementById('quarto-appendix');
+  var main = document.getElementById('quarto-document-content');
+  if (n && main && app && app.parentNode === main) {
+    main.appendChild(n);
+  }
+});
+</script>
+```
+
+
+# Consideraciones finales
+
+::::: {style="text-align: justify; text-justify: inter-word; line-height: 1.6;"}
+</p>
+
+Este recorrido se estructuró a partir de un interrogante decisivo para las disciplinas de intervención: si la digitalización de los sistemas de protección social depara un conocimiento más riguroso de la realidad o si, por el contrario, instituye una apariencia de objetividad técnica que invisibiliza sus propios sesgos de origen. El análisis de dispositivos como el «gemelo digital social» demuestra que el dato no opera como un reflejo aséptico de lo real, sino como el resultado de trayectorias de decisión técnica y política que las ciencias sociales deben estar en condiciones de disputar. Confiar de manera ciega la clasificación y la predicción de la elegibilidad de los sujetos de derecho a sistemas cerrados de simulación no solo diluye la responsabilidad política de la gestión estatal, sino que clausura el espacio para el encuentro intersubjetivo, amparando decisiones de descarte bajo una aparente neutralidad técnica.
+
+</p>
+
+</p>
+
+Frente a la deriva tecnocrática, la emergencia de asistentes colaborativos como Tomi IA se presenta como un contra-modelo metodológico sustantivo al proponer una «lectura lateral» donde el saber situado pertenece al actor local. No obstante, esta apertura también plantea interrogantes ineludibles sobre la delegación cognitiva. Como advierten las perspectivas críticas sobre el uso de modelos de lenguaje, el riesgo de estos asistentes radica en inducir una «pereza metacognitiva»; la aparente calidad y rapidez del resultado inmediato —un memo de gestión o una propuesta de ordenanza impecable— puede enmascarar la progresiva atrofia del proceso reflexivo y de aprendizaje de los equipos técnicos.
+
+</p>
+
+Por eso, aplicar un andamiaje de control a estos sistemas va más allá de lo técnico: es un ejercicio necesario de autonomía cognitiva. Consiste en construir una estructura donde el profesional guíe activamente el proceso en lugar de aceptar de forma pasiva las opciones automáticas del software, garantizando que la tecnología permanezca siempre subordinada a la deliberación humana y a la realidad de cada territorio.
+</p>
+
+</p>El lugar que le compete al Trabajo Social en esta encrucijada demanda trascender la razón instrumental para disputar activamente la gobernanza de la información. Esta convergencia no anula el saber acumulado de la disciplina; por el contrario, exige un enfoque relacional que comprenda que la escala estructural del big data y la profundidad vincular del small data constituyen dimensiones complementarias para el abordaje de la complejidad social contemporánea. Sostener una vigilancia ética y epistemológica permanente es lo que impide que la comodidad de la eficiencia técnica reemplace la escucha profesional y el encuentro humano en el territorio.</p>
+
+</p>Resta, sin embargo, la tarea estratégica de integrar estas dimensiones en la formación de grado para evitar que se profundice la brecha entre quienes disputan el diseño de la tecnología y quienes se reducen a su mera ejecución administrativa como cargadores de datos. La apropiación soberana de las herramientas ciencia de datos, que involucra el aprendizaje de habilidades de análisis, curaduría e interpelación de algoritmos, no representa un simple requisito de actualización técnica, sino una condición política de soberanía disciplinar. Disputar la arquitectura de estos dispositivos y de las categorías que clasifican a la población es, en última instancia, un acto indispensable para garantizar que la innovación tecnológica se traduzca en mayor equidad, resguardando la densidad de lo humano frente al diseño algorítmico.</p>
+
+
+# Referencias bibliográficas {.unnumbered}
+
+-   **Arias, A. J. (2022).** Registro propio. Organizaciones sociales, acumulación política y disputa sobre la estatalidad (2015-2019). En A. Arias y M. Oyhandy (Comps.), ***Gestionar, negociar y resistir: La disputa política de las organizaciones sociales durante el macrismo*** (pp. 19-36). EDULP.
+
+-   **Artazo, G. C., Eula, M., y Parano, M. (2024).** Ciencias Sociales, hibridez y Tecnologías 4.0: Oportunidades y desafíos. ***ConCienciaSocial. Revista digital de Trabajo Social, 8***(15), 78-93.
+
+-   **Barranco Expósito, C. (2004).** La intervención en Trabajo Social desde la calidad integrada. ***Alternativas. Cuadernos de Trabajo Social***, (12), 79-102
+
+-   **Burgaya, J. (2021). La manada digital. Feudalismo hipertecnológico en una democracia sin ciudadanos**. El Viejo Topo
+
+-   **Carlo, C. (2023, 21 de septiembre).** Data science and sociology: how to use data to explore and model social phenomena. ***Medium***. https://autognosi.medium.com/data-science-and-sociology-how-to-use-data-to-explore-and-model-social-phenomena-a28287b06917
+
+-   **Crawford, K. (2022)**. ***Atlas de Inteligencia Artificial: Poder, Política y Costos Planetarios*** (1.ª ed.). Fondo de Cultura Económica.
+
+-   **Da Empoli, G. (2025a)**. ***La hora de los depredadores*** (3.ª ed.). Seix Barral.
+
+-   **Da Empoli, G. (2025b)**. ***Los ingenieros del caos*** (2.ª ed.). Oberon.
+
+-   **Elorza, A. L., Rodríguez, M. A., & Monayar, V. (2019)**. ¿Concesión estatal o conquista social? El Registro Nacional de Barrios Populares como política social frente a la cuestión habitacional en la ciudad de Córdoba, Argentina. ***Cuaderno Urbano, 26***(26), 46-48
+
+-   **Fernández Álvarez, L. (2021, 7 de julio)**. ***Sombra aquí, sombra allá: reconocimiento facial discriminatorio. Mujeres con ciencia***. https://mujeresconciencia.com/2021/07/07/sombra-aqui-sombra-alla-reconocimiento-facial-discriminatorio/
+
+-   **Gindin, I. L., & Busso, M. P. (2021)**. El Big Data bajo la lupa: notas sobre el retrato de una época. En E. Actis, M. Berdondini, & S. R. Castro Rojas (Eds.), ***Ciencias Sociales y Big Data: Representaciones políticas, disputas comunicacionales y política internacional*** (1.ª ed., pp. 49-64). UNR Editora.
+
+-   **Gordillo, F. (2023, 8 de junio)**. Edición 6: Tecnología, ¿para qué? ***Substack***. https://florenciagordillo.substack.com/p/edicion-6-tecnologia-para-que
+
+-   **Grus, J. (2020)**. ***Ciencia de datos desde cero*** (2.ª ed.). O'Reilly.
+
+-   **Han, B.-C. (2022)**. ***Infocracia. La digitalización y la crisis de la democracia***. Taurus.
+
+-   **Pallero, J. (2026, 22 de mayo)**. El "Gemelo Digital" ¿modernización o vigilancia digital desde el Estado? ***Substack***. https://javierpallero.substack.com/p/el-gemelo-digital-modernizacion-o?r=aarpb&utm_campaign=post&utm_medium=web&triedRedirect=true
+
+-   **POLIS. (2022)**. Los ocho pasos de Bardach: una herramienta para el análisis de Políticas Públicas. ***Datos en Breve***, (45). Observatorio de Políticas Públicas - POLIS, Universidad Icesi. http://www.icesi.edu.co/polis/publicaciones/datos-en-breve.php
+
+-   **Rozas Pagaza, M. (2015)**. Reinscribir la relación de la intervención profesional en trabajo social, la cuestión social y las políticas sociales. ***Tendencias & Retos, 20***(1), 105-116.
+
+-   **UNESCO. (2021)**. ***La inteligencia artificial en la educación: Un enfoque para la inclusión y la equidad***. https://doi.org/10.5281/zenodo.4540935
+
+-   **Zelicovich, J. (2021)**. La política del Big Data en las relaciones comerciales internacionales. En E. Actis, M. Berdondini, & S. R. Castro Rojas (Eds.), ***Ciencias Sociales y Big Data: Representaciones políticas, disputas comunicacionales y política internacional*** (1.ª ed., pp. 247-264). UNR Editora.
+:::::
